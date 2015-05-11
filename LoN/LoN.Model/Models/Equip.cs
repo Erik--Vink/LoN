@@ -15,11 +15,12 @@ namespace LoN.Model.Models
 
         public string EquipName { get; set; }
 
-        public double Price { get; set; }
+        public int Price { get; set; }
 
         public int Strength { get; set; }
 
         public int Intelligence { get; set; }
+
         public int Agillity { get; set; }
 
         public int CategoryId { get; set; }
