@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LoN.View.ViewModel
 {
-    public class EquipVM : ViewModelBase
+    public class EquipViewModel : ViewModelBase
     {
         private int _id;
         private string _name;
@@ -16,9 +16,9 @@ namespace LoN.View.ViewModel
         private int _str;
         private int _int;
         private int _agi;
-        private CategoryVM _cat;
+        private int _catId;
 
-        public EquipVM(Equip e) 
+        public EquipViewModel(Equip e) 
         {
             this._id = e.EquipId;
             this._name = e.EquipName;
@@ -26,7 +26,7 @@ namespace LoN.View.ViewModel
             this._str = e.Strength;
             this._int = e.Intelligence;
             this._agi = e.Agillity;
-            this._cat = new CategoryVM(e.Category);
+            this._catId = e.CategoryId;
         }
 
         public int EquipId 
@@ -65,10 +65,10 @@ namespace LoN.View.ViewModel
             set { this._agi = value; RaisePropertyChanged(); }
         }
 
-        public CategoryVM Category 
+        public int CategoryId 
         {
-            get { return this._cat; }
-            set { this._cat = value; RaisePropertyChanged(); }
+            get { return this._catId; }
+            set { this._catId = value; RaisePropertyChanged(); }
         }
     }
 }

@@ -1,8 +1,13 @@
 ﻿<Window x:Class="LoN.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="525"
+        DataContext="{Binding Shop, Source={StaticResource Locator}}">
     <Grid>
-        
+        <DataGrid ItemsSource="{Binding Equipment}" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Equipment" Binding="{Binding EquipName}" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </Window>

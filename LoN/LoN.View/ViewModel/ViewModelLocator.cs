@@ -43,6 +43,7 @@ namespace LoN.View.ViewModel
             ////}
 
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<ShopViewModel>();
         }
 
         public MainViewModel Main
@@ -52,7 +53,15 @@ namespace LoN.View.ViewModel
                 return ServiceLocator.Current.GetInstance<MainViewModel>();
             }
         }
-        
+
+        public ShopViewModel Shop
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<ShopViewModel>();
+            }
+        }
+
         public static void Cleanup()
         {
             // TODO Clear the ViewModels

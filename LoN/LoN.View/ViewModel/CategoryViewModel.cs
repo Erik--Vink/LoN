@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LoN.View.ViewModel
 {
-    public class CategoryVM : ViewModelBase
+    public class CategoryViewModel : ViewModelBase
     {
         private int _id;
         private string _name;
@@ -24,7 +24,7 @@ namespace LoN.View.ViewModel
             set { this._name = value; RaisePropertyChanged(); }
         }
 
-        public CategoryVM(Category c) 
+        public CategoryViewModel(Category c) 
         {
             this.CategoryId = c.CategoryId;
             this.CategoryName = c.CategoryName;

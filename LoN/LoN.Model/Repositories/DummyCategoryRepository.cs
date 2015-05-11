@@ -23,7 +23,7 @@ namespace LoN.Model.Repositories
             }
         }
 
-        IEnumerable<Category> IGenericRepository<Category>.GetAll()
+        public IEnumerable<Category> GetAll()
         {
             List<Category> categories = new List<Category>
             {
@@ -38,7 +38,7 @@ namespace LoN.Model.Repositories
             return categories;
         }
 
-        Category IGenericRepository<Category>.GetOne(int key)
+        public Category GetOne(int key)
         {
             throw new NotImplementedException();
         }
