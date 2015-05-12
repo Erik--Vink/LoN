@@ -21,7 +21,12 @@ namespace LoN.View.ViewModel
         public EquipViewModel SelectedEquip 
         {
             get { return this._selectedEquip; }
-            set { this._selectedEquip = value; RaisePropertyChanged(); }
+            set
+            { 
+                this._selectedEquip = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => IsEquipSelected);
+            }
         }
 
         public CategoryViewModel SelectedCategory
@@ -35,6 +40,11 @@ namespace LoN.View.ViewModel
                 RaisePropertyChanged();
                 RaisePropertyChanged(() => AvailableEquipment);
             }
+        }
+
+        public bool IsEquipSelected
+        {
+            get { return _selectedEquip != null; }
         }
 
         public ShopViewModel() 

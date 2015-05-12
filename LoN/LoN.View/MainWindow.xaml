@@ -3,16 +3,74 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525"
         DataContext="{Binding Shop, Source={StaticResource Locator}}">
-    <Grid>
-        <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" Width="125" Height="260" Margin="26,25,366,34" SelectedItem="{Binding SelectedCategory}">
+    <StackPanel Orientation="Horizontal">
+        <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" Width="125" Height="260" SelectedItem="{Binding SelectedCategory}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Categories" Binding="{Binding CategoryName}" Width="*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid ItemsSource="{Binding AvailableEquipment}" AutoGenerateColumns="False" Width="125" Height="260" Margin="165,25,227,34" SelectedItem="{Binding SelectedEquip}">
+        <DataGrid ItemsSource="{Binding AvailableEquipment}" AutoGenerateColumns="False" Width="125" Height="260" SelectedItem="{Binding SelectedEquip}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Equipment" Binding="{Binding EquipName}" Width="*" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
-    </Grid>
+        <Grid Margin="0,30,0,29">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="100"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Content="Category" 
+        		FontSize="12" FontWeight="Bold"
+        		Foreground="Black"
+        		Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="1"/>
+
+            <Label Content="{Binding SelectedCategory.CategoryName}" FontSize="12" FontWeight="Normal" 
+        		Grid.Column="1" Grid.Row="0"/>
+
+            <Label Content="Name" FontSize="12" FontWeight="Bold" 
+        		Grid.Column="0" Grid.Row="1"/>
+
+            <Label Content="{Binding SelectedEquip.EquipName}" FontSize="12" FontWeight="Normal" 
+        		Grid.Column="1" Grid.Row="1"/>
+
+            <Label Content="Strength" FontSize="12" FontWeight="Bold" 
+                Grid.Column="0" Grid.Row="2"/>
+
+            <Label Content="{Binding SelectedEquip.Strength}" FontSize="12" FontWeight="Normal" 
+                Grid.Column="1" Grid.Row="2"/>
+
+            <Label Content="Intelligence" FontSize="12" FontWeight="Bold" 
+                Grid.Column="0" Grid.Row="3"/>
+
+            <Label Content="{Binding SelectedEquip.Intelligence}" FontSize="12" FontWeight="Normal" 
+                Grid.Column="1" Grid.Row="3"/>
+
+            <Label Content="Agillity" FontSize="12" FontWeight="Bold" 
+                Grid.Column="0" Grid.Row="4"/>
+
+            <Label Content="{Binding SelectedEquip.Agillity}" FontSize="12" FontWeight="Normal" 
+                Grid.Column="1" Grid.Row="4"/>
+
+            <Label Content="Price" FontSize="12" FontWeight="Bold" 
+                Grid.Column="0" Grid.Row="5"/>
+
+            <Label Content="{Binding SelectedEquip.Price}" FontSize="12" FontWeight="Normal" 
+                Grid.Column="1" Grid.Row="5"/>
+
+            <Button Content="Buy" IsEnabled="{Binding IsEquipSelected}" Grid.Column="1" Grid.Row="7"/>
+
+        </Grid>
+    </StackPanel>
 </Window>
