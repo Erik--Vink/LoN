@@ -4,9 +4,14 @@
         Title="MainWindow" Height="350" Width="525"
         DataContext="{Binding Shop, Source={StaticResource Locator}}">
     <Grid>
-        <DataGrid ItemsSource="{Binding Equipment}" AutoGenerateColumns="False">
+        <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" Width="125" Height="260" Margin="26,25,366,34" SelectedItem="{Binding SelectedCategory}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Equipment" Binding="{Binding EquipName}" />
+                <DataGridTextColumn Header="Categories" Binding="{Binding CategoryName}" Width="*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid ItemsSource="{Binding AvailableEquipment}" AutoGenerateColumns="False" Width="125" Height="260" Margin="165,25,227,34" SelectedItem="{Binding SelectedEquip}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Equipment" Binding="{Binding EquipName}" Width="*" IsReadOnly="True" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

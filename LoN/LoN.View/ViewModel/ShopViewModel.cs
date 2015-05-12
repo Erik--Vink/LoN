@@ -14,8 +14,9 @@ namespace LoN.View.ViewModel
         private EquipViewModel _selectedEquip;
         private CategoryViewModel _selectedCategory;
 
-        public ObservableCollection<EquipViewModel> Equipment { get; set; }
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
+        public ObservableCollection<EquipViewModel> Equipment { get; set; }
+        public ObservableCollection<EquipViewModel> AvailableEquipment { get; set; }
 
         public EquipViewModel SelectedEquip 
         {
@@ -26,7 +27,14 @@ namespace LoN.View.ViewModel
         public CategoryViewModel SelectedCategory
         { 
             get { return this._selectedCategory; } 
-            set { this._selectedCategory = value; RaisePropertyChanged(); }
+            set 
+            { 
+                this._selectedCategory = value;
+                SelectedEquip = null;
+                AvailableEquipment = ReloadAvailableEquipment();
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => AvailableEquipment);
+            }
         }
 
         public ShopViewModel() 
@@ -34,5 +42,15 @@ namespace LoN.View.ViewModel
             Categories = new ObservableCollection<CategoryViewModel>((new DummyCategoryRepository()).GetAll().Select(c => new CategoryViewModel(c)));
             Equipment = new ObservableCollection<EquipViewModel>((new DummyEquipRepository()).GetAll().Select(e => new EquipViewModel(e)));
         }
+
+        public ObservableCollection<EquipViewModel> ReloadAvailableEquipment()
+        {
+            return (_selectedCategory != null)
+                ? new ObservableCollection<EquipViewModel>(
+                    Equipment
+                        .Where(src => src.CategoryId.Equals(_selectedCategory.CategoryId)))
+                : new ObservableCollection<EquipViewModel>();
+        }
+
     }
 }
