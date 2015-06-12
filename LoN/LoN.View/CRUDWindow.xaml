@@ -67,7 +67,7 @@
             <TextBox Text="{Binding SelectedEquip.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Column="1" Grid.Row="5"/>
 
-            <Button Content="Save" Command="{Binding Path=SaveChanges}" Grid.Column="1" Grid.Row="7"/>
+            <Button Content="Save" Command="{Binding Path=Save}" Grid.Column="1" Grid.Row="7"/>
 
         </Grid>
     </StackPanel>
