@@ -44,6 +44,7 @@ namespace LoN.View.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ShopViewModel>();
+            SimpleIoc.Default.Register<CrudViewModel>();
         }
 
         public MainViewModel Main
@@ -59,6 +60,14 @@ namespace LoN.View.ViewModel
             get
             {
                 return ServiceLocator.Current.GetInstance<ShopViewModel>();
+            }
+        }
+
+        public CrudViewModel Crud
+        {
+            get
+            {
+                return ServiceLocator.Current.GetInstance<CrudViewModel>();
             }
         }
 
