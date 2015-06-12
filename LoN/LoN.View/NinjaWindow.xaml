@@ -63,11 +63,30 @@
             <ContentControl Content="{Binding NinjaViewModel.CategoryBoots}">
                 <ContentControl.ContentTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding EquipName}"></TextBlock>
+                        <TextBlock Text="{Binding EquipName}" TextWrapping="Wrap"></TextBlock>
                     </DataTemplate>
                 </ContentControl.ContentTemplate>
             </ContentControl>
         </Border>
+
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="22" Margin="296,439,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <TextBlock Text="Gear Value:" Margin="-73,0,73,0"></TextBlock>
+                <TextBlock Text="{Binding NinjaViewModel.GearValue}"></TextBlock>
+            </Grid>
+        </Border>
+
+        <Border BorderBrush="Black" BorderThickness="0" HorizontalAlignment="Left" Height="22" Margin="314,10,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <TextBlock Text="Strength:" Margin="-73,6,73,-3"></TextBlock>
+                <TextBlock Text="{Binding NinjaViewModel.NinjaStrength}" Margin="0,6,0,-5"></TextBlock>
+                <TextBlock Text="Agility:" Margin="-73,25,73,-25"></TextBlock>
+                <TextBlock Text="{Binding NinjaViewModel.NinjaAgillity}" Margin="0,26,0,-20"></TextBlock>
+                <TextBlock Text="Intelligence:" Margin="-73,44,73,-47"></TextBlock>
+                <TextBlock Text="{Binding NinjaViewModel.NinjaIntelligence}" Margin="0,44,0,-49"></TextBlock>
+            </Grid>
+        </Border>
+
     </Grid>
 
 </Window>

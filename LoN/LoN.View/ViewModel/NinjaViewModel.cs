@@ -11,7 +11,7 @@ namespace LoN.View.ViewModel
     public class NinjaViewModel : ViewModelBase
     {
         // Constructor
-        public NinjaViewModel() { _ninja = new Ninja(); }
+        public NinjaViewModel() { _ninja = new Ninja(); _ninja.Budget = 500; }
         public NinjaViewModel(Ninja ninja) { _ninja = ninja ?? new Ninja(); }
 
         // Field
@@ -22,6 +22,10 @@ namespace LoN.View.ViewModel
         private Equip _categoryBelt;
         private Equip _categoryLegs;
         private Equip _categoryBoots;
+        private int _ninjaStrength;
+        private int _ninjaAgillity;
+        private int _ninjaIntelligence;
+        private int _gearvalue;
 
         // Property
         public ICollection<Equip> Equips
@@ -115,7 +119,63 @@ namespace LoN.View.ViewModel
             }
         }
 
-      
+        public int NinjaStrength
+        {
+            get { return _ninjaStrength; }
+            set
+            {
+                _ninjaStrength = value;
+                RaisePropertyChanged();
+            }
+        }
+        public int NinjaAgillity
+        {
+            get { return _ninjaAgillity; }
+            set
+            {
+                _ninjaAgillity = value;
+                RaisePropertyChanged();
+            }
+        }
+        public int NinjaIntelligence
+        {
+            get { return _ninjaIntelligence; }
+            set
+            {
+                _ninjaIntelligence = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public int GearValue
+        {
+            get { return _gearvalue; }
+            set
+            {
+                _gearvalue = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public void AddEquipment(Equip equip)
+        {
+            _ninja.Budget       -= equip.Price;
+            _gearvalue          += equip.Price;
+            _ninjaStrength      += equip.Strength;
+            _ninjaAgillity      += equip.Agillity;
+            _ninjaIntelligence  += equip.Intelligence;
+            Equips.Add(equip);
+        }
+
+        public void RemoveEquipment(Equip equip)
+        {
+            _ninja.Budget       += equip.Price;
+            _gearvalue          -= equip.Price;
+            _ninjaStrength      -= equip.Strength;
+            _ninjaAgillity      -= equip.Agillity;
+            _ninjaIntelligence  -= equip.Intelligence;
+            Equips.Remove(equip);
+        }
 
         public void ReloadEquipment()
         {

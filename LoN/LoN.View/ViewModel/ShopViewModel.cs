@@ -118,12 +118,11 @@ namespace LoN.View.ViewModel
                 if (oldCategoryEquip != null)
                 {
                     //Refund money and replace the early added equip with the same category             
-                    NinjaViewModel.Equips.Remove(oldCategoryEquip);
+                    NinjaViewModel.RemoveEquipment(oldCategoryEquip);
                 }
                
             }
-            //NinjaViewModel.Equips.Add(SelectedEquip.ToEntity());
-            NinjaViewModel.Equips.Add(SelectedEquip.ToEntity());
+            NinjaViewModel.AddEquipment(SelectedEquip.ToEntity());
             NinjaViewModel.ReloadEquipment();
             RaisePropertyChanged(() => NinjaViewModel);
 
