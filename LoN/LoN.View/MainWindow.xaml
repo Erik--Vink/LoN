@@ -2,7 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainWindow" Height="350" Width="525"
-        DataContext="{Binding Shop, Source={StaticResource Locator}}">
+        DataContext="{Binding Shop, Source={StaticResource Locator}}"
+        Name="Main"
+        ResizeMode="NoResize">
     <StackPanel Orientation="Horizontal">
         <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" Width="125" Height="260" SelectedItem="{Binding SelectedCategory}">
             <DataGrid.Columns>
@@ -69,7 +71,7 @@
             <Label Content="{Binding SelectedEquip.Price}" FontSize="12" FontWeight="Normal" 
                 Grid.Column="1" Grid.Row="5"/>
 
-            <Button Content="Buy" IsEnabled="{Binding IsEquipSelected}" Grid.Column="1" Grid.Row="7"/>
+            <Button Content="Buy" IsEnabled="{Binding IsEquipSelected}" Command="{Binding BuyEquip}" Grid.Column="1" Grid.Row="7"/>
 
         </Grid>
     </StackPanel>

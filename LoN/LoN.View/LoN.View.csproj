@@ -85,6 +85,7 @@
     <Compile Include="ViewModel\CrudViewModel.cs" />
     <Compile Include="ViewModel\EquipViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\NinjaViewModel.cs" />
     <Compile Include="ViewModel\ShopViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="CrudWindow.xaml">
@@ -141,6 +142,12 @@
       <Project>{2b07ce98-3ed4-42b9-8138-822387dfb595}</Project>
       <Name>LoN.Model</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Ninja.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Ninja.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
