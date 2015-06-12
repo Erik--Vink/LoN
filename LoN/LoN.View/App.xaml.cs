@@ -15,7 +15,7 @@ namespace LoN.View
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            ToShopView();
+            ToCrudView();
         }
 
         public void ToShopView()
@@ -27,14 +27,14 @@ namespace LoN.View
             if (crud != null) { crud.Close(); }
         }
 
-        //public void ToCrudView()
-        //{
-        //    new CrudWindow() { Top = 100, Left = 100 }.Show();
-        //    var main = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Main");
-        //    if (main != null) { main.Close(); }
-        //    var list = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "List");
-        //    if (list != null) { list.Close(); }
-        //}
+        public void ToCrudView()
+        {
+            new CRUDWindow() { Top = 100, Left = 100 }.Show();
+            var main = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Main");
+            if (main != null) { main.Close(); }
+            var list = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "List");
+            if (list != null) { list.Close(); }
+        }
 
 
     }

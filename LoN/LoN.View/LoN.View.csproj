@@ -75,15 +75,23 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CRUDWindow.xaml.cs">
+      <DependentUpon>CRUDWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NinjaWindow.xaml.cs">
       <DependentUpon>NinjaWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\CategoryViewModel.cs" />
+    <Compile Include="ViewModel\CrudViewModel.cs" />
     <Compile Include="ViewModel\EquipViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\NinjaViewModel.cs" />
     <Compile Include="ViewModel\ShopViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="CRUDWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="NinjaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
