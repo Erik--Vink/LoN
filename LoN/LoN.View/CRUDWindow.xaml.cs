@@ -17,9 +17,9 @@ namespace LoN.View
     /// <summary>
     /// Interaction logic for CRUD.xaml
     /// </summary>
-    public partial class CRUD : Window
+    public partial class CRUDWindow : Window
     {
-        public CRUD()
+        public CRUDWindow()
         {
             InitializeComponent();
         }
