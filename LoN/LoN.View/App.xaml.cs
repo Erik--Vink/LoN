@@ -29,7 +29,7 @@ namespace LoN.View
 
         public void ToCrudView()
         {
-            new CRUDWindow() { Top = 100, Left = 100 }.Show();
+            new CrudWindow() { Top = 100, Left = 100 }.Show();
             var main = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Main");
             if (main != null) { main.Close(); }
             var list = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "List");

@@ -75,8 +75,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CRUDWindow.xaml.cs">
-      <DependentUpon>CRUDWindow.xaml</DependentUpon>
+    <Compile Include="CrudWindow.xaml.cs">
+      <DependentUpon>CrudWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="NinjaWindow.xaml.cs">
       <DependentUpon>NinjaWindow.xaml</DependentUpon>
@@ -87,7 +87,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ShopViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Page Include="CRUDWindow.xaml">
+    <Page Include="CrudWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -12,11 +12,10 @@ using System.Windows.Input;
 
 namespace LoN.View.ViewModel
 {
-    class CrudViewModel : ViewModelBase
+    public class CrudViewModel : ViewModelBase
     {
         private EquipViewModel _selectedEquip;
         private CategoryViewModel _selectedCategory;
-        private ICommand _saveChanges;
 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
         public ObservableCollection<EquipViewModel> Equipment { get; set; }
@@ -55,8 +54,6 @@ namespace LoN.View.ViewModel
         {
             Categories = new ObservableCollection<CategoryViewModel>((new DummyCategoryRepository()).GetAll().Select(c => new CategoryViewModel(c)));
             Equipment = new ObservableCollection<EquipViewModel>((new DummyEquipRepository()).GetAll().Select(e => new EquipViewModel(e)));
-
-            _saveChanges = new RelayCommand(SaveEquipVM);
         }
 
         public ObservableCollection<EquipViewModel> ReloadAvailableEquipment()
@@ -68,20 +65,5 @@ namespace LoN.View.ViewModel
                 : new ObservableCollection<EquipViewModel>();
         }
 
-        public void SaveEquipVM()
-        {
-            Equip e = new Equip() { Agillity = _selectedEquip.Agillity,
-                                    CategoryId = _selectedEquip.CategoryId,
-                                    Intelligence = _selectedEquip.Intelligence,
-                                    Strength = _selectedEquip.Strength,
-                                    Price = _selectedEquip.Price,
-                                    EquipName = _selectedEquip.EquipName
-            };
-
-            //I cannot save yet, because repos
-
-            RaisePropertyChanged();
-            RaisePropertyChanged(() => AvailableEquipment);
-        }
     }
 }

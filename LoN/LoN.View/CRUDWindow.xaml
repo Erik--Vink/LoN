@@ -1,8 +1,8 @@
-﻿<Window x:Class="LoN.View.CRUDWindow"
+﻿<Window x:Class="LoN.View.CrudWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525"
-        DataContext="{Binding Shop, Source={StaticResource Locator}}">
+        Title="CrudWindow" Height="350" Width="525"
+        DataContext="{Binding Crud, Source={StaticResource Locator}}">
     <StackPanel Orientation="Horizontal">
         <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" Width="125" Height="260" SelectedItem="{Binding SelectedCategory}">
             <DataGrid.Columns>
@@ -67,7 +67,7 @@
             <TextBox Text="{Binding SelectedEquip.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                 Grid.Column="1" Grid.Row="5"/>
 
-            <Button Content="Save" Command="{Binding Save}" Grid.Column="1" Grid.Row="7"/>
+            <Button Content="Save" Command="{Binding Path=SaveChanges}" Grid.Column="1" Grid.Row="7"/>
 
         </Grid>
     </StackPanel>
