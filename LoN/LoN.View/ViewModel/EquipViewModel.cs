@@ -70,5 +70,10 @@ namespace LoN.View.ViewModel
             get { return this._catId; }
             set { this._catId = value; RaisePropertyChanged(); }
         }
+
+        public Equip ToEntity()
+        {
+            return new Equip { EquipId = EquipId, EquipName = EquipName, Price = Price, Strength = Strength, Intelligence = Intelligence, Agillity = Agillity, CategoryId = CategoryId };
+        }
     }
 }
