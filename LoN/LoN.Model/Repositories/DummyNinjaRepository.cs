@@ -32,7 +32,7 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Delete(int key)
+        public void Delete(Ninja entity)
         {
             throw new NotImplementedException();
         }
@@ -42,7 +42,7 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Update(int originalKey, Ninja updatedEntity)
+        public void Update(Ninja updatedEntity)
         {
             throw new NotImplementedException();
         }
