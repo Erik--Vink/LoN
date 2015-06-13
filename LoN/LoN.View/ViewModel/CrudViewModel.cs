@@ -20,7 +20,9 @@ namespace LoN.View.ViewModel
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
         public ObservableCollection<EquipViewModel> Equipment { get; set; }
         public ObservableCollection<EquipViewModel> AvailableEquipment { get; set; }
-        public ICommand Save { get; set; }
+        public ICommand Update { get; set; }
+        public ICommand Delete { get; set; }
+        public ICommand Create { get; set; }
 
         public EquipViewModel SelectedEquip 
         {
@@ -43,9 +45,14 @@ namespace LoN.View.ViewModel
                 AvailableEquipment = ReloadAvailableEquipment();
                 RaisePropertyChanged();
                 RaisePropertyChanged(() => AvailableEquipment);
+                RaisePropertyChanged(() => IsCategorySelected);
             }
         }
 
+        public bool IsCategorySelected
+        {
+            get { return _selectedCategory != null; }
+        }
         public bool IsEquipSelected
         {
             get { return _selectedEquip != null; }
@@ -55,12 +62,10 @@ namespace LoN.View.ViewModel
         {
             Categories = new ObservableCollection<CategoryViewModel>((new DummyCategoryRepository()).GetAll().Select(c => new CategoryViewModel(c)));
             Equipment = new ObservableCollection<EquipViewModel>((new DummyEquipRepository()).GetAll().Select(e => new EquipViewModel(e)));
-            //Add a "New" object. It'll only be added when the save is called tho.
-            foreach (var cat in Categories) 
-            {
-                Equipment.Add(new EquipViewModel(new Equip() { CategoryId = cat.CategoryId, EquipName = "... create new" }));
-            }
-            Save = new RelayCommand(SaveEquipVM);
+
+            Update = new RelayCommand(UpdateEquipVM);
+            Delete = new RelayCommand(DeleteEquipVM);
+            Create = new RelayCommand(CreateEquipVM);
         }
 
         public ObservableCollection<EquipViewModel> ReloadAvailableEquipment()
@@ -72,41 +77,70 @@ namespace LoN.View.ViewModel
                 : new ObservableCollection<EquipViewModel>();
         }
         
-        public void SaveEquipVM()
+        public void UpdateEquipVM()
         {
-            Equip e = new Equip()
+
+            if (_selectedEquip != null) 
             {
-                Agillity = _selectedEquip.Agillity,
-                CategoryId = _selectedEquip.CategoryId,
-                Intelligence = _selectedEquip.Intelligence,
-                Strength = _selectedEquip.Strength,
-                Price = _selectedEquip.Price,
-                EquipName = _selectedEquip.EquipName
-            };
+                Equip e = new Equip()
+                {
+                    Agillity = _selectedEquip.Agillity,
+                    CategoryId = _selectedEquip.CategoryId,
+                    Intelligence = _selectedEquip.Intelligence,
+                    Strength = _selectedEquip.Strength,
+                    Price = _selectedEquip.Price,
+                    EquipName = _selectedEquip.EquipName
+                };
+
+                if (_selectedEquip.EquipId > 0)
+                {
+
+                }
+                else 
+                {
+
+                }
+
+
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => AvailableEquipment);
+            }
+            
 
             //I cannot save yet, because repos
 
             //if exists, update, else save
 
-            RaisePropertyChanged();
-            RaisePropertyChanged(() => AvailableEquipment);
+            
         }
         public void DeleteEquipVM()
         {
-            Equip e = new Equip()
+            if(_selectedEquip != null && _selectedEquip.EquipId != null)
             {
-                Agillity = _selectedEquip.Agillity,
-                CategoryId = _selectedEquip.CategoryId,
-                Intelligence = _selectedEquip.Intelligence,
-                Strength = _selectedEquip.Strength,
-                Price = _selectedEquip.Price,
-                EquipName = _selectedEquip.EquipName
-            };
+                Equip e = new Equip()
+                {
+                    Agillity = _selectedEquip.Agillity,
+                    CategoryId = _selectedEquip.CategoryId,
+                    Intelligence = _selectedEquip.Intelligence,
+                    Strength = _selectedEquip.Strength,
+                    Price = _selectedEquip.Price,
+                    EquipName = _selectedEquip.EquipName
+                };
 
-            //I cannot delete yet, because repos
+                //repo remove
 
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => AvailableEquipment);
+            }
+        }
 
+        public void CreateEquipVM()
+        {
+            Equipment.Add(new EquipViewModel(new Equip() { CategoryId = _selectedCategory.CategoryId, EquipName = "new Item" }));
 
+            //save it to the repo
+
+            AvailableEquipment = ReloadAvailableEquipment();
             RaisePropertyChanged();
             RaisePropertyChanged(() => AvailableEquipment);
         }

@@ -4,17 +4,32 @@
         Title="CrudWindow" Height="350" Width="525"
         DataContext="{Binding Crud, Source={StaticResource Locator}}">
     <StackPanel Orientation="Horizontal">
-        <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" Width="125" Height="260" SelectedItem="{Binding SelectedCategory}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Categories" Binding="{Binding CategoryName}" Width="*" IsReadOnly="True"/>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid ItemsSource="{Binding AvailableEquipment}" AutoGenerateColumns="False" Width="125" Height="260" SelectedItem="{Binding SelectedEquip}">
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Equipment" Binding="{Binding EquipName}" Width="*" IsReadOnly="True" />
-            </DataGrid.Columns>
-        </DataGrid>
-        <Grid Margin="0,30,0,29">
+        <Grid Margin="0,30,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="230" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="125"/>
+                <ColumnDefinition Width="125"/>
+            </Grid.ColumnDefinitions>
+            <DataGrid ItemsSource="{Binding Categories}" AutoGenerateColumns="False" Width="125" SelectedItem="{Binding SelectedCategory}"
+                      Grid.Column="0" Grid.Row="0">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Categories" Binding="{Binding CategoryName}" Width="*" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <DataGrid ItemsSource="{Binding AvailableEquipment}" AutoGenerateColumns="False" SelectedItem="{Binding SelectedEquip}"
+    			Grid.Row="0" Grid.Column="1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Equipment" Binding="{Binding EquipName}" Width="*" IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="New Item" Command="{Binding Create}" IsEnabled="{Binding IsCategorySelected}"
+        		Grid.Column="1" Grid.Row="1"/>
+        </Grid>
+
+        <Grid Margin="0,30,0,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
@@ -22,52 +37,56 @@
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="30"/>
                 <RowDefinition Height="30"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="75"/>
+                <ColumnDefinition Width="100"/>
                 <ColumnDefinition Width="100"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Category" FontSize="12" FontWeight="Bold"
-        		Grid.Column="0" Grid.Row="0"/>
+    			Grid.Column="0" Grid.Row="0"/>
 
-            <ComboBox ItemsSource="{Binding Path=Categories}" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryId" SelectedValue="{Binding SelectedEquip.CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                      Grid.Column="1" Grid.Row="0"/>
+            <ComboBox ItemsSource="{Binding Categories}" DisplayMemberPath="CategoryName" SelectedValuePath="CategoryId" SelectedValue="{Binding SelectedEquip.CategoryId, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+    			Grid.Column="1" Grid.Row="0"/>
 
             <Label Content="Name" FontSize="12" FontWeight="Bold" 
-        		Grid.Column="0" Grid.Row="1"/>
+    			Grid.Column="0" Grid.Row="1"/>
 
             <TextBox Text="{Binding SelectedEquip.EquipName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
-                     Grid.Column="1" Grid.Row="1"/>
+    			Grid.Column="1" Grid.Row="1"/>
 
             <Label Content="Strength" FontSize="12" FontWeight="Bold" 
-                Grid.Column="0" Grid.Row="2"/>
+    			Grid.Column="0" Grid.Row="2"/>
 
             <TextBox Text="{Binding SelectedEquip.Strength, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                     Grid.Column="1" Grid.Row="2"/>
+    			Grid.Column="1" Grid.Row="2"/>
 
             <Label Content="Intelligence" FontSize="12" FontWeight="Bold" 
-                Grid.Column="0" Grid.Row="3"/>
+    			Grid.Column="0" Grid.Row="3"/>
 
             <TextBox Text="{Binding SelectedEquip.Intelligence, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Grid.Column="1" Grid.Row="3"/>
+    			Grid.Column="1" Grid.Row="3"/>
 
             <Label Content="Agillity" FontSize="12" FontWeight="Bold" 
-                Grid.Column="0" Grid.Row="4"/>
+    			Grid.Column="0" Grid.Row="4"/>
 
             <TextBox Text="{Binding SelectedEquip.Agillity, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Grid.Column="1" Grid.Row="4"/>
+    			Grid.Column="1" Grid.Row="4"/>
 
             <Label Content="Price" FontSize="12" FontWeight="Bold" 
-                Grid.Column="0" Grid.Row="5"/>
+    			Grid.Column="0" Grid.Row="5"/>
 
             <TextBox Text="{Binding SelectedEquip.Price, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                Grid.Column="1" Grid.Row="5"/>
+    			Grid.Column="1" Grid.Row="5"/>
 
-            <Button Content="Save" Command="{Binding Path=Save}" Grid.Column="1" Grid.Row="7"/>
+            <Button Content="Update" Command="{Binding Update}" IsEnabled="{Binding IsEquipSelected}" 
+    			Grid.Column="1" Grid.Row="7" />
+            <Button Content="Delete" Command="{Binding Delete}" IsEnabled="{Binding IsEquipSelected}" 
+    			Grid.Column="1" Grid.Row="8" />
 
         </Grid>
     </StackPanel>
