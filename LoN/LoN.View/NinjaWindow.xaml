@@ -9,64 +9,352 @@
         <ImageBrush ImageSource="Resources/Ninja.jpg" Stretch="Fill"/>
     </Window.Background>
     <Grid>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="156,39,0,0" VerticalAlignment="Top" Width="70">
-            <ContentControl Content="{Binding NinjaViewModel.CategoryHead}">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding EquipName}"></TextBlock>
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
-            </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="161,40,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <Label Content="Head" HorizontalContentAlignment="Center" FontSize="10" BorderBrush="Black" BorderThickness="1" Margin="0,-1,0,58" Width="68"></Label>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryHead}" Margin="0,23,0,46">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding EquipName}" FontSize="10" Margin="0,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Strength:" FontSize="10" Margin="0,35,24,32"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryHead}" Margin="49,35,0,26">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Strength}" FontSize="10" Margin="3,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Agility:" FontSize="10" Margin="0,44,24,23"></TextBlock>
+                
+                <ContentControl Content="{Binding NinjaViewModel.CategoryHead}" Margin="49,44,0,19">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Agillity}" FontSize="10" Margin="3,0,0,0" ></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                
+                <TextBlock Text="Intelligence:" FontSize="10" Margin="0,54,16,14"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryHead}" Margin="49,54,-10,13">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Intelligence}" FontSize="10" Margin="5,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                
+                <TextBlock Text="Price:" FontSize="10" Margin="0,67,16,1"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryHead}" Margin="39,67,0,0">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Price}" FontSize="10" Margin="7,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Grid>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="189,125,0,0" VerticalAlignment="Top" Width="70">
-            <ContentControl Content="{Binding NinjaViewModel.CategoryShoulders}">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding EquipName}"></TextBlock>
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
-            </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="236,113,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <Label Content="Shoulders" HorizontalContentAlignment="Center" FontSize="10" BorderBrush="Black" BorderThickness="1" Margin="0,-1,0,58" Width="68"></Label>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryShoulders}" Margin="0,23,0,46">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding EquipName}" FontSize="10" Margin="0,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Strength:" FontSize="10" Margin="0,35,24,32"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryShoulders}" Margin="49,35,0,26">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Strength}" FontSize="10" Margin="3,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Agility:" FontSize="10" Margin="0,44,24,23"></TextBlock>
+
+                <ContentControl Content="{Binding NinjaViewModel.CategoryShoulders}" Margin="49,44,0,19">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Agillity}" FontSize="10" Margin="3,0,0,0" ></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Intelligence:" FontSize="10" Margin="0,54,16,14"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryShoulders}" Margin="49,54,-10,13">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Intelligence}" FontSize="10" Margin="5,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Price:" FontSize="10" Margin="0,67,16,1"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryShoulders}" Margin="39,67,0,0">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Price}" FontSize="10" Margin="7,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Grid>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="213,236,0,0" VerticalAlignment="Top" Width="70">
-            <ContentControl Content="{Binding NinjaViewModel.CategoryChest}">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding EquipName}"></TextBlock>
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
-            </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="224,230,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <Label Content="Chest" HorizontalContentAlignment="Center" FontSize="10" BorderBrush="Black" BorderThickness="1" Margin="0,-1,0,58" Width="68"></Label>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryChest}" Margin="0,23,0,46">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding EquipName}" FontSize="10" Margin="0,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Strength:" FontSize="10" Margin="0,35,24,32"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryChest}" Margin="49,35,0,26">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Strength}" FontSize="10" Margin="3,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Agility:" FontSize="10" Margin="0,44,24,23"></TextBlock>
+
+                <ContentControl Content="{Binding NinjaViewModel.CategoryChest}" Margin="49,44,0,19">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Agillity}" FontSize="10" Margin="3,0,0,0" ></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Intelligence:" FontSize="10" Margin="0,54,16,14"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryChest}" Margin="49,54,-10,13">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Intelligence}" FontSize="10" Margin="5,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Price:" FontSize="10" Margin="0,67,16,1"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryChest}" Margin="39,67,0,0">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Price}" FontSize="10" Margin="7,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Grid>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="33,236,0,0" VerticalAlignment="Top" Width="70">
-            <ContentControl Content="{Binding NinjaViewModel.CategoryBelt}">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding EquipName}"></TextBlock>
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
-            </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="10,230,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <Label Content="Belt" HorizontalContentAlignment="Center" FontSize="10" BorderBrush="Black" BorderThickness="1" Margin="0,-1,0,58" Width="68"></Label>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBelt}" Margin="0,23,0,46">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding EquipName}" FontSize="10" Margin="0,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Strength:" FontSize="10" Margin="0,35,24,32"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBelt}" Margin="49,35,0,26">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Strength}" FontSize="10" Margin="3,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Agility:" FontSize="10" Margin="0,44,24,23"></TextBlock>
+
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBelt}" Margin="49,44,0,19">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Agillity}" FontSize="10" Margin="3,0,0,0" ></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Intelligence:" FontSize="10" Margin="0,54,16,14"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBelt}" Margin="49,54,-10,13">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Intelligence}" FontSize="10" Margin="5,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Price:" FontSize="10" Margin="0,67,16,1"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBelt}" Margin="39,67,0,0">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Price}" FontSize="10" Margin="7,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Grid>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="135,351,0,0" VerticalAlignment="Top" Width="70">
-            <ContentControl Content="{Binding NinjaViewModel.CategoryLegs}">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding EquipName}"></TextBlock>
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
-            </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="128,351,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <Label Content="Legs" HorizontalContentAlignment="Center" FontSize="10" BorderBrush="Black" BorderThickness="1" Margin="0,-1,0,58" Width="68"></Label>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryLegs}" Margin="0,23,0,46">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding EquipName}" FontSize="10" Margin="0,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Strength:" FontSize="10" Margin="0,35,24,32"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryLegs}" Margin="49,35,0,26">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Strength}" FontSize="10" Margin="3,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Agility:" FontSize="10" Margin="0,44,24,23"></TextBlock>
+
+                <ContentControl Content="{Binding NinjaViewModel.CategoryLegs}" Margin="49,44,0,19">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Agillity}" FontSize="10" Margin="3,0,0,0" ></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Intelligence:" FontSize="10" Margin="0,54,16,14"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryLegs}" Margin="49,54,-10,13">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Intelligence}" FontSize="10" Margin="5,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Price:" FontSize="10" Margin="0,67,16,1"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryLegs}" Margin="39,67,0,0">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Price}" FontSize="10" Margin="7,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Grid>
         </Border>
 
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="324,328,0,0" VerticalAlignment="Top" Width="70">
-            <ContentControl Content="{Binding NinjaViewModel.CategoryBoots}">
-                <ContentControl.ContentTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding EquipName}" TextWrapping="Wrap"></TextBlock>
-                    </DataTemplate>
-                </ContentControl.ContentTemplate>
-            </ContentControl>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="83" Margin="313,296,0,0" VerticalAlignment="Top" Width="70">
+            <Grid>
+                <Label Content="Boots" HorizontalContentAlignment="Center" FontSize="10" BorderBrush="Black" BorderThickness="1" Margin="0,-1,0,58" Width="68"></Label>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBoots}" Margin="0,23,0,46">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding EquipName}" FontSize="10" Margin="0,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Strength:" FontSize="10" Margin="0,35,24,32"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBoots}" Margin="49,35,0,26">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Strength}" FontSize="10" Margin="3,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+                <TextBlock Text="Agility:" FontSize="10" Margin="0,44,24,23"></TextBlock>
+
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBoots}" Margin="49,44,0,19">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Agillity}" FontSize="10" Margin="3,0,0,0" ></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Intelligence:" FontSize="10" Margin="0,54,16,14"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBoots}" Margin="49,54,-10,13">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Intelligence}" FontSize="10" Margin="5,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+
+                <TextBlock Text="Price:" FontSize="10" Margin="0,67,16,1"></TextBlock>
+                <ContentControl Content="{Binding NinjaViewModel.CategoryBoots}" Margin="39,67,0,0">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding Price}" FontSize="10" Margin="7,0,0,0"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Grid>
         </Border>
 
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="22" Margin="296,439,0,0" VerticalAlignment="Top" Width="70">
