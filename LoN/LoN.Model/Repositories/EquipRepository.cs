@@ -25,27 +25,42 @@ namespace LoN.Model.Repositories
 
         public Equip GetOne(int key)
         {
-            return Context.Equip.Find(key);
+            using (var Context = new AppContext())
+            {
+                return Context.Equip.Find(key);
+            }
         }
 
         public void Delete(Equip entity)
         {
-            Context.Entry(entity).State = EntityState.Deleted;
+            using (var Context = new AppContext()) 
+            {
+                Context.Entry(entity).State = EntityState.Deleted; 
+            }
         }
 
         public void Create(Equip entity)
         {
-            Context.Entry(entity).State = EntityState.Added;
+            using (var Context = new AppContext())
+            {
+                Context.Entry(entity).State = EntityState.Added;
+            }
         }
 
         public void Update(Equip updatedEntity)
         {
-            Context.Entry(updatedEntity).State = EntityState.Modified;  
+            using (var Context = new AppContext())
+            {
+                Context.Entry(updatedEntity).State = EntityState.Modified;
+            }
         }
 
         public void Save()
         {
-            Context.SaveChanges();
+            using (var Context = new AppContext())
+            {
+                Context.SaveChanges();
+            }
         }
     }
 }

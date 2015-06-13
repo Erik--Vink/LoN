@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LoN.Model.Interfaces;
 using LoN.Model.Models;
 using LoN.Model.Repositories;
 using System;
@@ -16,6 +17,8 @@ namespace LoN.View.ViewModel
     {
         private EquipViewModel _selectedEquip;
         private CategoryViewModel _selectedCategory;
+        private IGenericRepository<Category> _categoryRepository;
+        private IGenericRepository<Equip> _equipRepository;
 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
         public ObservableCollection<EquipViewModel> Equipment { get; set; }
@@ -58,10 +61,18 @@ namespace LoN.View.ViewModel
             get { return _selectedEquip != null; }
         }
 
+        public void RefreshData()
+        {
+            Categories = new ObservableCollection<CategoryViewModel>(_categoryRepository.GetAll().Select(c => new CategoryViewModel(c)));
+            Equipment = new ObservableCollection<EquipViewModel>(_equipRepository.GetAll().Select(e => new EquipViewModel(e)));
+            AvailableEquipment = ReloadAvailableEquipment();
+        }
+
         public CrudViewModel() 
         {
-            Categories = new ObservableCollection<CategoryViewModel>((new DummyCategoryRepository()).GetAll().Select(c => new CategoryViewModel(c)));
-            Equipment = new ObservableCollection<EquipViewModel>((new DummyEquipRepository()).GetAll().Select(e => new EquipViewModel(e)));
+            _categoryRepository = new CategoryRepository();
+            _equipRepository = new EquipRepository();
+            RefreshData();
 
             Update = new RelayCommand(UpdateEquipVM);
             Delete = new RelayCommand(DeleteEquipVM);
@@ -92,30 +103,17 @@ namespace LoN.View.ViewModel
                     EquipName = _selectedEquip.EquipName
                 };
 
-                if (_selectedEquip.EquipId > 0)
-                {
-
-                }
-                else 
-                {
-
-                }
-
+                _equipRepository.Update(e);
+                RefreshData();
 
                 RaisePropertyChanged();
                 RaisePropertyChanged(() => AvailableEquipment);
             }
-            
-
-            //I cannot save yet, because repos
-
-            //if exists, update, else save
-
-            
         }
+
         public void DeleteEquipVM()
         {
-            if(_selectedEquip != null && _selectedEquip.EquipId != null)
+            if(_selectedEquip != null)
             {
                 Equip e = new Equip()
                 {
@@ -127,7 +125,8 @@ namespace LoN.View.ViewModel
                     EquipName = _selectedEquip.EquipName
                 };
 
-                //repo remove
+                _equipRepository.Delete(e);
+                RefreshData();
 
                 RaisePropertyChanged();
                 RaisePropertyChanged(() => AvailableEquipment);
@@ -136,11 +135,10 @@ namespace LoN.View.ViewModel
 
         public void CreateEquipVM()
         {
-            Equipment.Add(new EquipViewModel(new Equip() { CategoryId = _selectedCategory.CategoryId, EquipName = "new Item" }));
+            Equip e = new Equip() { CategoryId = _selectedCategory.CategoryId, EquipName = "new Item" };
+            _equipRepository.Create(e);
+            RefreshData();
 
-            //save it to the repo
-
-            AvailableEquipment = ReloadAvailableEquipment();
             RaisePropertyChanged();
             RaisePropertyChanged(() => AvailableEquipment);
         }
