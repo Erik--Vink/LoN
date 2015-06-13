@@ -20,11 +20,11 @@ namespace LoN.View
 
         public void ToShopView()
         {
-            var x = new NinjaWindow() { Top = 100, Left = 100 };
-            x.Show();
-            var y = new NinjaLoadWindow();
+            var x = new MainWindow() { Top = 100, Left = 100 };
+            x.Show();          
+            var y = new NinjaWindow() { Top = x.Top, Left = (x.Left + x.Width) };
             y.Show();
-            new MainWindow() { Top = x.Top, Left = (x.Left + x.Width) }.Show();
+            new NinjaLoadWindow() { Top = y.Top, Left = (y.Left + y.Width) }.Show();           
             var crud = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Crud");
             if (crud != null) { crud.Close(); }
         }

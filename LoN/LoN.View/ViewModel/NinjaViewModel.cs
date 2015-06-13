@@ -11,7 +11,7 @@ namespace LoN.View.ViewModel
     public class NinjaViewModel : ViewModelBase
     {
         // Constructor
-        public NinjaViewModel() { _ninja = new Ninja(); _ninja.Budget = 500; }
+        public NinjaViewModel() { _ninja = new Ninja(); Budget = 100; BudgetMessage = "Hidden"; }
         public NinjaViewModel(Ninja ninja) { _ninja = ninja ?? new Ninja(); }
 
         // Field
@@ -26,6 +26,7 @@ namespace LoN.View.ViewModel
         private int _ninjaAgillity;
         private int _ninjaIntelligence;
         private int _gearvalue;
+        private string _budgetmessage;
 
         // Property
         public ICollection<Equip> Equips
@@ -157,14 +158,48 @@ namespace LoN.View.ViewModel
             }
         }
 
+        public string BudgetMessage
+        {
+            get { return _budgetmessage; }
+            set
+            {
+                _budgetmessage = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        
+
         public void AddEquipment(Equip equip)
         {
-            _ninja.Budget       -= equip.Price;
-            _gearvalue          += equip.Price;
-            _ninjaStrength      += equip.Strength;
-            _ninjaAgillity      += equip.Agillity;
-            _ninjaIntelligence  += equip.Intelligence;
-            Equips.Add(equip);
+           if (equip != null)
+            {
+                    _ninja.Budget -= equip.Price;
+                    _gearvalue += equip.Price;
+                    _ninjaStrength += equip.Strength;
+                    _ninjaAgillity += equip.Agillity;
+                    _ninjaIntelligence += equip.Intelligence;
+                    Equips.Add(equip);
+                    BudgetMessage = "Hidden";      
+            }
+           
+        }
+
+        public bool BugetIsHighEnough(Equip equip)
+        {
+            if (equip != null)
+            {
+                if ((Budget - equip.Price) >= 0)
+                {
+                    BudgetMessage = "Hidden";  
+                    return true;
+                }
+                else
+                {
+                   BudgetMessage = "Visible";         
+                }
+            }
+            return false;
         }
 
         public void RemoveEquipment(Equip equip)
@@ -212,7 +247,7 @@ namespace LoN.View.ViewModel
         }
 
         // Method
-        //public Afdeling ToEntity() { return new Afdeling { AfdelingNaam = AfdelingNaam, Omschrijving = Omschrijving }; }
+        public Ninja ToEntity() { return new Ninja { NinjaId = NinjaId, Budget = Budget }; }
 
     }
 }

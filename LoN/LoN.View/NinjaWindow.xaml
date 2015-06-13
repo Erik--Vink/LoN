@@ -1,7 +1,7 @@
 ﻿<Window x:Class="LoN.View.NinjaWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="500" Width="400"
+        Title="NinjaWindow" Height="500" Width="400"
         DataContext="{Binding Shop, Source={StaticResource Locator}}"
         Name="Ninja"
         ResizeMode="NoResize">
@@ -375,6 +375,9 @@
             </Grid>
         </Border>
 
+        <Button Content="Save" Command="{Binding NewNinja}" IsEnabled="{Binding IsCreateEnabled}" Margin="0,439,328,0"></Button>
+        <Button Content="Update" Command="{Binding SaveNinja}" IsEnabled="{Binding IsUpdateEnabled}" Margin="66,439,262,0"></Button>
+        
     </Grid>
 
 </Window>
