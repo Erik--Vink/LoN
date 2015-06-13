@@ -93,15 +93,7 @@ namespace LoN.View.ViewModel
 
             if (_selectedEquip != null) 
             {
-                Equip e = new Equip()
-                {
-                    Agillity = _selectedEquip.Agillity,
-                    CategoryId = _selectedEquip.CategoryId,
-                    Intelligence = _selectedEquip.Intelligence,
-                    Strength = _selectedEquip.Strength,
-                    Price = _selectedEquip.Price,
-                    EquipName = _selectedEquip.EquipName
-                };
+                Equip e = _selectedEquip.ToEntity();
 
                 _equipRepository.Update(e);
                 RefreshData();
@@ -115,15 +107,7 @@ namespace LoN.View.ViewModel
         {
             if(_selectedEquip != null)
             {
-                Equip e = new Equip()
-                {
-                    Agillity = _selectedEquip.Agillity,
-                    CategoryId = _selectedEquip.CategoryId,
-                    Intelligence = _selectedEquip.Intelligence,
-                    Strength = _selectedEquip.Strength,
-                    Price = _selectedEquip.Price,
-                    EquipName = _selectedEquip.EquipName
-                };
+                Equip e = _selectedEquip.ToEntity();
 
                 _equipRepository.Delete(e);
                 RefreshData();
@@ -135,7 +119,7 @@ namespace LoN.View.ViewModel
 
         public void CreateEquipVM()
         {
-            Equip e = new Equip() { CategoryId = _selectedCategory.CategoryId, EquipName = "new Item" };
+            Equip e = new Equip() { CategoryId = _selectedCategory.CategoryId, EquipName = "new Item", Agillity=0, Intelligence=0, Price=0, Strength=0};
             _equipRepository.Create(e);
             RefreshData();
 

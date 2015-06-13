@@ -35,7 +35,8 @@ namespace LoN.Model.Repositories
         {
             using (var Context = new AppContext()) 
             {
-                Context.Entry(entity).State = EntityState.Deleted; 
+                Context.Entry(entity).State = EntityState.Deleted;
+                Context.SaveChanges();
             }
         }
 
@@ -44,6 +45,7 @@ namespace LoN.Model.Repositories
             using (var Context = new AppContext())
             {
                 Context.Entry(entity).State = EntityState.Added;
+                Context.SaveChanges();
             }
         }
 
@@ -52,6 +54,7 @@ namespace LoN.Model.Repositories
             using (var Context = new AppContext())
             {
                 Context.Entry(updatedEntity).State = EntityState.Modified;
+                Context.SaveChanges();
             }
         }
 

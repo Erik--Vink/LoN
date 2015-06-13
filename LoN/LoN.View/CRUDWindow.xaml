@@ -25,7 +25,7 @@
                     <DataGridTextColumn Header="Equipment" Binding="{Binding EquipName}" Width="*" IsReadOnly="True" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="New Item" Command="{Binding Create}" IsEnabled="{Binding IsCategorySelected}"
+            <Button Content="Add new item" Command="{Binding Create}" IsEnabled="{Binding IsCategorySelected}"
         		Grid.Column="1" Grid.Row="1"/>
         </Grid>
 
