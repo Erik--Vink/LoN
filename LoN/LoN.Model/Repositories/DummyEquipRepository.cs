@@ -70,7 +70,7 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Delete(int key)
+        public void Delete(Equip entity)
         {
             throw new NotImplementedException();
         }
@@ -80,9 +80,9 @@ namespace LoN.Model.Repositories
             myEquipList.Add(entity);
         }
 
-        public void Update(int originalKey, Equip updatedEntity)
-        {
-            var toUpdate = myEquipList.Where(x => x.EquipId == originalKey).ToArray()[0];
+        public void Update(Equip updatedEntity)
+        {        
+            var toUpdate = myEquipList.Where(x => x.EquipId == updatedEntity.EquipId).ToArray()[0];
             toUpdate.CategoryId = updatedEntity.CategoryId;
             toUpdate.EquipName = updatedEntity.EquipName;
             toUpdate.Agillity = updatedEntity.Agillity;

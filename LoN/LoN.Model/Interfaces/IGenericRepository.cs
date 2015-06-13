@@ -12,9 +12,9 @@ namespace LoN.Model.Interfaces
         AppContext Context { get; set; }
         IEnumerable<T> GetAll();
         T GetOne(int key);
-        void Delete(int key);
+        void Delete(T entity);
         void Create(T entity);
-        void Update(int originalKey, T updatedEntity);
+        void Update(T updatedEntity);
         void Save();
     }
 }

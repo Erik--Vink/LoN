@@ -43,7 +43,7 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Delete(int key)
+        public void Delete(Category entity)
         {
             throw new NotImplementedException();
         }
@@ -53,7 +53,7 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Update(int originalKey, Category updatedEntity)
+        public void Update(Category updatedEntity)
         {
             throw new NotImplementedException();
         }

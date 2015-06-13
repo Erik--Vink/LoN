@@ -181,29 +181,29 @@ namespace LoN.View.ViewModel
         {
             foreach (Equip equip in Equips)
             {
-                if (equip.CategoryId == 0)
+                if (equip.CategoryId == 1)
                 {
                     CategoryHead = equip;
                  
                 }
-                else if (equip.CategoryId == 1)
+                else if (equip.CategoryId == 2)
                 {
                     CategoryShoulders = equip;
                 }
-                else if (equip.CategoryId == 2)
+                else if (equip.CategoryId == 3)
                 {
                     CategoryChest = equip;
 
                 }
-                else if (equip.CategoryId == 3)
+                else if (equip.CategoryId == 4)
                 {
                     CategoryBelt = equip;
                 }
-                else if (equip.CategoryId == 4)
+                else if (equip.CategoryId == 5)
                 {
                     CategoryLegs = equip;
                 }
-                else if (equip.CategoryId == 5)
+                else if (equip.CategoryId == 6)
                 {
                     CategoryBoots = equip;
                 }

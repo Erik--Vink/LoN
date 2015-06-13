@@ -15,7 +15,7 @@ namespace LoN.View
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            ToCrudView();
+            ToShopView();
         }
 
         public void ToShopView()

@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using LoN.Model.Interfaces;
+using LoN.Model.Models;
 using LoN.Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,9 @@ namespace LoN.View.ViewModel
     {
         private EquipViewModel _selectedEquip;
         private CategoryViewModel _selectedCategory;
+        private IGenericRepository<Category> _categoryRepository;
+        private IGenericRepository<Equip> _equipRepository;
+        private IGenericRepository<Ninja> _ninjaRepository;
 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
         public ObservableCollection<EquipViewModel> Equipment { get; set; }
@@ -55,9 +60,14 @@ namespace LoN.View.ViewModel
 
         public ShopViewModel() 
         {
-            Categories = new ObservableCollection<CategoryViewModel>((new DummyCategoryRepository()).GetAll().Select(c => new CategoryViewModel(c)));
-            Equipment = new ObservableCollection<EquipViewModel>((new DummyEquipRepository()).GetAll().Select(e => new EquipViewModel(e)));
+            Categories = new ObservableCollection<CategoryViewModel>((new CategoryRepository()).GetAll().Select(c => new CategoryViewModel(c)));
+            Equipment = new ObservableCollection<EquipViewModel>((new EquipRepository()).GetAll().Select(e => new EquipViewModel(e)));
             NinjaViewModel = new NinjaViewModel();
+
+            _categoryRepository = new CategoryRepository();
+            _equipRepository = new EquipRepository();
+            _ninjaRepository = new NinjaRepository();
+
             BuyEquip = new RelayCommand(AddSelectedEquipToNinja);
         }
 
@@ -72,43 +82,12 @@ namespace LoN.View.ViewModel
                 : new ObservableCollection<EquipViewModel>();
         }
 
-        //Collections
-
-        // Lijst met alle equips van de huidige ninja
-        //private readonly ObservableCollection<EquipViewModel> _rawNinjaEquips;
-        //public ObservableCollection<EquipViewModel> NinjaEquips
-        //{
-        //    get { return _rawNinjaEquips; }
-        //}
-
-        //// Lijst met 'unieke' productmerken in het boodschappenlijstje en aantallen
-        //public ObservableCollection<KeyValuePair<EquipViewModel, int>> FormattedBoodschappenLijst
-        //{
-        //    get
-        //    {
-        //        return new ObservableCollection<KeyValuePair<EquipViewModel, int>>(RawBoodschappenLijst
-        //            .GroupBy(x => new { x.MerkNaam, x.ProductNaam, x.Prijs, x.Korting })
-        //            .Select(grp => new KeyValuePair<MerkProductViewModel, int>(
-        //                    new MerkProductViewModel
-        //                    {
-        //                        MerkNaam = grp.Key.MerkNaam,
-        //                        ProductNaam = grp.Key.ProductNaam,
-        //                        Prijs = grp.Key.Prijs,
-        //                        CurrentKortingPercentage = new CouponViewModel { Korting = grp.Key.Korting }
-        //                    },
-        //                    grp.Count()
-        //                )
-        //            ));
-        //    }
-        //}
-
         public ICommand BuyEquip { get; set; }
 
         public void AddSelectedEquipToNinja()
         {
-     
             //Check if an equip of the same category already is added(or the current equip)
-            //- If true, delete the equip and refund the money
+            //- If true, delete the equip
             //Add the current selected Equip
             if (NinjaViewModel.Equips != null)
             {
@@ -117,20 +96,46 @@ namespace LoN.View.ViewModel
                 .FirstOrDefault();
                 if (oldCategoryEquip != null)
                 {
-                    //Refund money and replace the early added equip with the same category             
+                    //Remove the early added equip with the same category             
                     NinjaViewModel.RemoveEquipment(oldCategoryEquip);
                 }
                
             }
             NinjaViewModel.AddEquipment(SelectedEquip.ToEntity());
-            NinjaViewModel.ReloadEquipment();
+            ReloadEquipment();
             RaisePropertyChanged(() => NinjaViewModel);
+        }
 
-            // als item in rawboodschappenlijst zit && heeft al korting, haal korting op en voeg toe aan new merkproductviewmodel
-            //RawBoodschappenLijst.Add(new MerkProductViewModel(SelectedMerkProduct.ToEntity()) { CurrentKortingPercentage = new CouponViewModel { Korting = korting } });
-            //SelectedKeyValuePair = new KeyValuePair<MerkProductViewModel, int>();
-            //RaisePropertyChanged(() => FormattedBoodschappenLijst);
-            //RaisePropertyChanged(() => TotalPrijs);
+        public void ReloadEquipment()
+        {
+            foreach (Equip equip in NinjaViewModel.Equips)
+            {
+                if ( _categoryRepository.GetOne(equip.CategoryId).CategoryName == "Head")
+                {
+                    NinjaViewModel.CategoryHead = equip;
+                }
+                else if (_categoryRepository.GetOne(equip.CategoryId).CategoryName == "Shoulders")
+                {
+                    NinjaViewModel.CategoryShoulders = equip;
+                }
+                else if (_categoryRepository.GetOne(equip.CategoryId).CategoryName == "Chest")
+                {
+                    NinjaViewModel.CategoryChest = equip;
+                }
+                else if (_categoryRepository.GetOne(equip.CategoryId).CategoryName == "Belt")
+                {
+                    NinjaViewModel.CategoryBelt = equip;
+                }
+                else if (_categoryRepository.GetOne(equip.CategoryId).CategoryName == "Legs")
+                {
+                    NinjaViewModel.CategoryLegs = equip;
+                }
+                else if (_categoryRepository.GetOne(equip.CategoryId).CategoryName == "Boots")
+                {
+                    NinjaViewModel.CategoryBoots = equip;
+                }
+                
+            }
         }
 
     }
