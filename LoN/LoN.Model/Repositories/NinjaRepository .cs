@@ -17,32 +17,53 @@ namespace LoN.Model.Repositories
 
         public IEnumerable<Ninja> GetAll()
         {
-            return Context.Ninja.AsEnumerable();
+            using (var Context = new AppContext())
+            {
+                return Context.Ninja.ToList();
+            }
         }
 
         public Ninja GetOne(int key)
         {
-            return Context.Ninja.Find(key);
+            using (var Context = new AppContext())
+            {
+                return Context.Ninja.Find(key);
+            }
         }
 
         public void Delete(Ninja entity)
         {
-            Context.Entry(entity).State = EntityState.Deleted;
+            using (var Context = new AppContext())
+            {
+                Context.Entry(entity).State = EntityState.Deleted;
+                Context.SaveChanges();
+            }
         }
 
         public void Create(Ninja entity)
         {
-            Context.Entry(entity).State = EntityState.Added;
+            using (var Context = new AppContext())
+            {
+                Context.Entry(entity).State = EntityState.Added;
+                Context.SaveChanges();
+            }
         }
 
         public void Update(Ninja updatedEntity)
         {
-            Context.Entry(updatedEntity).State = EntityState.Modified;  
+            using (var Context = new AppContext())
+            {
+                Context.Entry(updatedEntity).State = EntityState.Modified;
+                Context.SaveChanges();
+            }
         }
 
         public void Save()
         {
-            Context.SaveChanges();
+            using (var Context = new AppContext())
+            {
+                Context.SaveChanges();
+            }
         }
     }
 }

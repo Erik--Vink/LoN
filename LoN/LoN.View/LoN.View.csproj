@@ -78,6 +78,9 @@
     <Compile Include="CrudWindow.xaml.cs">
       <DependentUpon>CrudWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="NinjaLoadWindow.xaml.cs">
+      <DependentUpon>NinjaLoadWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="NinjaWindow.xaml.cs">
       <DependentUpon>NinjaWindow.xaml</DependentUpon>
     </Compile>
@@ -91,6 +94,10 @@
     <Page Include="CrudWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="NinjaLoadWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NinjaWindow.xaml">
       <Generator>MSBuild:Compile</Generator>

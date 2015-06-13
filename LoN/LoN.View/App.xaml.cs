@@ -15,13 +15,15 @@ namespace LoN.View
     {
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
-            ToCrudView();
+            ToShopView();
         }
 
         public void ToShopView()
         {
             var x = new NinjaWindow() { Top = 100, Left = 100 };
             x.Show();
+            var y = new NinjaLoadWindow();
+            y.Show();
             new MainWindow() { Top = x.Top, Left = (x.Left + x.Width) }.Show();
             var crud = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Crud");
             if (crud != null) { crud.Close(); }
