@@ -36,9 +36,10 @@ namespace LoN.Model.Repositories
             Context.Entry(entity).State = EntityState.Deleted;
         }
 
-        public void Create(Category entity)
+        public Category Create(Category entity)
         {
             Context.Entry(entity).State = EntityState.Added;
+            return null;
         }
 
         public void Update(Category updatedEntity)

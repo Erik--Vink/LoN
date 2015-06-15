@@ -13,7 +13,7 @@ namespace LoN.Model.Interfaces
         IEnumerable<T> GetAll();
         T GetOne(int key);
         void Delete(T entity);
-        void Create(T entity);
+        T Create(T entity);
         void Update(T updatedEntity);
         void Save();
     }

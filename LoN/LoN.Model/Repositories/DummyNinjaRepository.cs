@@ -37,7 +37,7 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Create(Ninja entity)
+        public Ninja Create(Ninja entity)
         {
             throw new NotImplementedException();
         }

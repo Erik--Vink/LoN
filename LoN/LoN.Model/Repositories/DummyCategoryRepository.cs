@@ -48,7 +48,7 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Create(Category entity)
+        public Category Create(Category entity)
         {
             throw new NotImplementedException();
         }

@@ -248,7 +248,7 @@ namespace LoN.View.ViewModel
         }
 
         // Method
-        public Ninja ToEntity() { return new Ninja { NinjaId = NinjaId, Budget = Budget }; }
+        public Ninja ToEntity() { return new Ninja { Budget = Budget }; }
 
     }
 }

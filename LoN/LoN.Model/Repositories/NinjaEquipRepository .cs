@@ -40,13 +40,14 @@ namespace LoN.Model.Repositories
             }
         }
 
-        public void Create(NinjaEquip entity)
+        public NinjaEquip Create(NinjaEquip entity)
         {
             using (var Context = new AppContext())
             {
                 Context.Entry(entity).State = EntityState.Added;
                 Context.SaveChanges();
             }
+            return null;
         }
 
         public void Update(NinjaEquip updatedEntity)

@@ -17,10 +17,11 @@ namespace LoN.View.ViewModel
     {
         private EquipViewModel _selectedEquip;
         private CategoryViewModel _selectedCategory;
+        private NinjaViewModel _selectedNinjaViewModel;
         private IGenericRepository<Category> _categoryRepository;
         private IGenericRepository<Equip> _equipRepository;
         private IGenericRepository<Ninja> _ninjaRepository;
-        private bool _hasNewNinja = true;
+        private IGenericRepository<NinjaEquip> _ninjaEquipRepository;
 
         public ObservableCollection<CategoryViewModel> Categories { get; set; }
         public ObservableCollection<EquipViewModel> Equipment { get; set; }
@@ -28,7 +29,8 @@ namespace LoN.View.ViewModel
         public ObservableCollection<EquipViewModel> NinjaEquips { get; set; }
         public ObservableCollection<NinjaViewModel> AllNinjas { get; set; }
         public NinjaViewModel NinjaViewModel { get; set; }
-        public NinjaViewModel SelectedNinjaViewModel { get; set; }
+       
+
         public EquipViewModel SelectedEquip 
         {
             get { return this._selectedEquip; }
@@ -52,11 +54,23 @@ namespace LoN.View.ViewModel
             }
         }
 
+        public NinjaViewModel SelectedNinjaViewModel
+        {
+            get { return _selectedNinjaViewModel; }
+            set
+            {
+                _selectedNinjaViewModel = value;
+                RaisePropertyChanged();
+                RaisePropertyChanged(() => IsLoadableSelected);
+            }
+        }
+
         public ShopViewModel() 
         {
             _categoryRepository = new CategoryRepository();
             _equipRepository = new EquipRepository();
             _ninjaRepository = new NinjaRepository();
+            _ninjaEquipRepository = new NinjaEquipRepository();
 
             Categories = new ObservableCollection<CategoryViewModel>(_categoryRepository.GetAll().Select(c => new CategoryViewModel(c)));
             Equipment = new ObservableCollection<EquipViewModel>(_equipRepository.GetAll().Select(e => new EquipViewModel(e)));
@@ -64,7 +78,7 @@ namespace LoN.View.ViewModel
             NinjaViewModel = new NinjaViewModel();
 
             BuyEquip = new RelayCommand(AddSelectedEquipToNinja);
-            NewNinja = new RelayCommand(NewCurrentNinja);
+            NewNinja = new RelayCommand(SaveNewNinja);
             SaveNinja = new RelayCommand(SaveCurrentNinja);
             LoadNinja = new RelayCommand(LoadCurrentNinja);
         }
@@ -98,34 +112,45 @@ namespace LoN.View.ViewModel
         public ICommand SaveNinja { get; set; }
         public void SaveCurrentNinja()
         {
-            if (_hasNewNinja)
-            {
-                _ninjaRepository.Create(null);
-            }
-            else
-            {
-                _ninjaRepository.Update(null);
-            }
+            //if (_hasNewNinja)
+            //{
+            //    _ninjaRepository.Create(null);
+            //}
+            //else
+            //{
+            //    _ninjaRepository.Update(null);
+            //}
             AllNinjas = new ObservableCollection<NinjaViewModel>(_ninjaRepository.GetAll().Select(n => new NinjaViewModel(n)));
             RaisePropertyChanged(() => AllNinjas);
         }
 
         public ICommand NewNinja { get; set; }
-        public void NewCurrentNinja()
+        public void SaveNewNinja()
         {
             //Add new Ninja
+            var id = _ninjaRepository.Create(this.NinjaViewModel.ToEntity()).NinjaId;
 
             //Add NinjaEquips
+            foreach (Equip equip in this.NinjaViewModel.Equips)
+            {
+                NinjaEquip newEquip = new NinjaEquip();
+                newEquip.EquipId = equip.EquipId;
+                newEquip.NinjaId = id;
+                _ninjaEquipRepository.Create(newEquip);               
+            }
 
-            _hasNewNinja = true;
             this.NinjaViewModel = new NinjaViewModel();
+            AllNinjas = new ObservableCollection<NinjaViewModel>(_ninjaRepository.GetAll().Select(n => new NinjaViewModel(n)));
+            RaisePropertyChanged(() => this.NinjaViewModel);
+            RaisePropertyChanged(() => AllNinjas);
         }
 
         public ICommand LoadNinja { get; set; }
         public void LoadCurrentNinja()
-        {
-            _hasNewNinja = false;
+        {           
             this.NinjaViewModel = SelectedNinjaViewModel;
+            RaisePropertyChanged(() => this.NinjaViewModel);
+
         }
 
         #endregion
@@ -196,14 +221,5 @@ namespace LoN.View.ViewModel
         }
 
         #endregion
-
-
-
-
-
-
-
-        
-
     }
 }

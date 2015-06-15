@@ -40,13 +40,15 @@ namespace LoN.Model.Repositories
             }
         }
 
-        public void Create(Ninja entity)
+        public Ninja Create(Ninja entity)
         {
             using (var Context = new AppContext())
             {
                 Context.Entry(entity).State = EntityState.Added;
                 Context.SaveChanges();
-            }
+                Context.Entry(entity).GetDatabaseValues();
+                return entity;
+            }        
         }
 
         public void Update(Ninja updatedEntity)

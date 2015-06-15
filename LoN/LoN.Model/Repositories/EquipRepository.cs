@@ -40,12 +40,14 @@ namespace LoN.Model.Repositories
             }
         }
 
-        public void Create(Equip entity)
+        public Equip Create(Equip entity)
         {
             using (var Context = new AppContext())
             {
-                Context.Entry(entity).State = EntityState.Added;
+                Context.Entry(entity).State = EntityState.Added;              
                 Context.SaveChanges();
+                Context.Entry(entity).GetDatabaseValues();
+                return entity;
             }
         }
 

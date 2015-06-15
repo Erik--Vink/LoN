@@ -14,7 +14,7 @@
                 <RowDefinition Height="230"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <DataGrid ItemsSource="{Binding AllNinjas}" AutoGenerateColumns="False" Width="125" Height="230" SelectedItem="{Binding SelectedNinja}"
+            <DataGrid ItemsSource="{Binding AllNinjas}" AutoGenerateColumns="False" Width="125" Height="230" SelectedItem="{Binding SelectedNinjaViewModel}"
                       Grid.Column="0" Grid.Row="0" >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Ninja's" Binding="{Binding NinjaId}" Width="*" IsReadOnly="True"/>

@@ -75,9 +75,10 @@ namespace LoN.Model.Repositories
             throw new NotImplementedException();
         }
 
-        public void Create(Equip entity)
+        public Equip Create(Equip entity)
         {
             myEquipList.Add(entity);
+            return null;
         }
 
         public void Update(Equip updatedEntity)
