@@ -13,6 +13,8 @@ namespace LoN.Model.Context
         public DbSet<Category> Category { get; set; }
         public DbSet<Equip> Equip { get; set; }
         public DbSet<Ninja> Ninja { get; set; }
+
+        public DbSet<NinjaEquip> NinjaEquip { get; set; }
         public AppContext()
             : base("AppContext") { }
     }

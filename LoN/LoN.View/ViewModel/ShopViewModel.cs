@@ -146,11 +146,11 @@ namespace LoN.View.ViewModel
 
         public bool IsCreateEnabled
         {
-            get { return NinjaViewModel.NinjaId == null; }
+            get { return NinjaViewModel.NinjaId == 0; }
         }
         public bool IsUpdateEnabled
         {
-            get { return NinjaViewModel.NinjaId != null; }
+            get { return NinjaViewModel.NinjaId != 0; }
         }
 
         #endregion

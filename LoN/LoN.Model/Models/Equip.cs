@@ -28,11 +28,7 @@ namespace LoN.Model.Models
         [ForeignKey("CategoryId")]
         public virtual Category Category { get; set; }
 
-        public virtual ICollection<Ninja> Ninjas { get; set; }
-
-        public Equip()
-        {
-            Ninjas = new HashSet<Ninja>();
-        }
+        public virtual ICollection<NinjaEquip> NinjaEquips { get; set; }
+       
     }
 }

@@ -14,11 +14,7 @@ namespace LoN.Model.Models
 
         public double Budget { get; set; }
 
-        public virtual ICollection<Equip> Equips { get; set; }
-
-        public Ninja()
-        {
-            Equips = new HashSet<Equip>();
-        }
+        public virtual ICollection<NinjaEquip> Equips { get; set; }
+      
     }
 }

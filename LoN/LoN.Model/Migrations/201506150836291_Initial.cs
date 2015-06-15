@@ -33,6 +33,19 @@ namespace LoN.Model.Migrations
                 .Index(t => t.CategoryId);
             
             CreateTable(
+                "dbo.NinjaEquips",
+                c => new
+                    {
+                        NinjaId = c.Int(nullable: false),
+                        EquipId = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => new { t.NinjaId, t.EquipId })
+                .ForeignKey("dbo.Equips", t => t.EquipId, cascadeDelete: true)
+                .ForeignKey("dbo.Ninjas", t => t.NinjaId, cascadeDelete: true)
+                .Index(t => t.NinjaId)
+                .Index(t => t.EquipId);
+            
+            CreateTable(
                 "dbo.Ninjas",
                 c => new
                     {
@@ -41,31 +54,18 @@ namespace LoN.Model.Migrations
                     })
                 .PrimaryKey(t => t.NinjaId);
             
-            CreateTable(
-                "dbo.NinjaEquips",
-                c => new
-                    {
-                        Ninja_NinjaId = c.Int(nullable: false),
-                        Equip_EquipId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.Ninja_NinjaId, t.Equip_EquipId })
-                .ForeignKey("dbo.Ninjas", t => t.Ninja_NinjaId, cascadeDelete: true)
-                .ForeignKey("dbo.Equips", t => t.Equip_EquipId, cascadeDelete: true)
-                .Index(t => t.Ninja_NinjaId)
-                .Index(t => t.Equip_EquipId);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.NinjaEquips", "Equip_EquipId", "dbo.Equips");
-            DropForeignKey("dbo.NinjaEquips", "Ninja_NinjaId", "dbo.Ninjas");
+            DropForeignKey("dbo.NinjaEquips", "NinjaId", "dbo.Ninjas");
+            DropForeignKey("dbo.NinjaEquips", "EquipId", "dbo.Equips");
             DropForeignKey("dbo.Equips", "CategoryId", "dbo.Categories");
-            DropIndex("dbo.NinjaEquips", new[] { "Equip_EquipId" });
-            DropIndex("dbo.NinjaEquips", new[] { "Ninja_NinjaId" });
+            DropIndex("dbo.NinjaEquips", new[] { "EquipId" });
+            DropIndex("dbo.NinjaEquips", new[] { "NinjaId" });
             DropIndex("dbo.Equips", new[] { "CategoryId" });
-            DropTable("dbo.NinjaEquips");
             DropTable("dbo.Ninjas");
+            DropTable("dbo.NinjaEquips");
             DropTable("dbo.Equips");
             DropTable("dbo.Categories");
         }

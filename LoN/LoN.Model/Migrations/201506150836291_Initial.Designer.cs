@@ -13,7 +13,7 @@ namespace LoN.Model.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201506130922280_Initial"; }
+            get { return "201506150836291_Initial"; }
         }
         
         string IMigrationMetadata.Source

@@ -11,11 +11,12 @@ namespace LoN.View.ViewModel
     public class NinjaViewModel : ViewModelBase
     {
         // Constructor
-        public NinjaViewModel() { _ninja = new Ninja(); Budget = 100; BudgetMessage = "Hidden"; }
+        public NinjaViewModel() { _ninja = new Ninja(); Budget = 100; BudgetMessage = "Hidden"; Equips = new List<Equip>(); }
         public NinjaViewModel(Ninja ninja) { _ninja = ninja ?? new Ninja(); }
 
         // Field
         private readonly Ninja _ninja;
+        private List<Equip> _equips;
         private Equip _categoryHead;
         private Equip _categoryShoulders;
         private Equip _categoryChest;
@@ -29,12 +30,12 @@ namespace LoN.View.ViewModel
         private string _budgetmessage;
 
         // Property
-        public ICollection<Equip> Equips
+        public List<Equip> Equips
         {
-            get { return _ninja.Equips;}
+            get { return _equips;}
             set
             {
-                _ninja.Equips = value;
+                _equips = value;
                 ReloadEquipment();
                 RaisePropertyChanged();
             }
