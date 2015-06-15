@@ -247,6 +247,11 @@ namespace LoN.View.ViewModel
             }
         }
 
+        public void RefreshNinjaWindow()
+        {
+            ReloadEquipment();
+        }
+
         // Method
         public Ninja ToEntity() { return new Ninja { Budget = Budget }; }
 

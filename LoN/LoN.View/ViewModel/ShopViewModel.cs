@@ -149,7 +149,17 @@ namespace LoN.View.ViewModel
         public void LoadCurrentNinja()
         {           
             this.NinjaViewModel = SelectedNinjaViewModel;
-            RaisePropertyChanged(() => this.NinjaViewModel);
+
+            //Load the equips from the selected Ninja
+            var EquipIdList = _ninjaEquipRepository.GetAll().Where(x => x.NinjaId == this.NinjaViewModel.NinjaId).ToList();
+            var eqToAdd = EquipIdList.Select(x => _equipRepository.GetOne(x.EquipId)).ToList();
+            NinjaViewModel.Equips = eqToAdd;
+
+            RaisePropertyChanged(() => this.NinjaViewModel);          
+            RaisePropertyChanged(() => IsUpdateEnabled);
+            RaisePropertyChanged(() => IsCreateEnabled);
+            this.NinjaViewModel.BudgetMessage = "Hidden";
+            RaisePropertyChanged(() => this.NinjaViewModel.BudgetMessage);
 
         }
 
