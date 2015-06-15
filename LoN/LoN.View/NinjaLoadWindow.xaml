@@ -14,10 +14,10 @@
                 <RowDefinition Height="230"/>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <DataGrid ItemsSource="{Binding AllNinjas}" AutoGenerateColumns="False" Width="125" Height="230" SelectedItem="{Binding SelectedNinjaViewModel}"
+            <DataGrid ItemsSource="{Binding AllNinjas}" AutoGenerateColumns="False" IsReadOnly="True" Width="125" Height="230" SelectedItem="{Binding SelectedNinjaViewModel}"
                       Grid.Column="0" Grid.Row="0" >
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Ninja's" Binding="{Binding NinjaId}" Width="*" IsReadOnly="True"/>
+                    <DataGridTextColumn Header="Ninja's" Binding="{Binding NinjaId}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
             <Button IsEnabled="{Binding IsLoadableSelected}" Command="{Binding LoadNinja}" Content="Load" Grid.Column="0" Grid.Row="1" />
