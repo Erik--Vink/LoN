@@ -15,7 +15,7 @@ namespace LoN.Test.Tests
     {
         private IGenericRepository<Equip> equipRepo;
         private IGenericRepository<Category> catRepo;
-        private CrudViewModel equipVM;
+        private CrudViewModel CrudVM;
 
         [TestInitialize]
         public void TestInitialize() 
@@ -23,7 +23,7 @@ namespace LoN.Test.Tests
             this.equipRepo = new DummyEquipRepository();
             this.catRepo = new DummyCategoryRepository();
             
-            this.equipVM = new CrudViewModel(this.catRepo, this.equipRepo);
+            this.CrudVM = new CrudViewModel(this.catRepo, this.equipRepo);
         }
 
         [TestMethod]
@@ -33,8 +33,8 @@ namespace LoN.Test.Tests
             
             var maxBefore = equipRepo.GetAll().Max(x => x.EquipId);
 
-            equipVM.SelectedCategory = new CategoryViewModel(catRepo.GetOne(catId)); //Doesn't really matter too much, so long as they stay the same
-            equipVM.CreateEquipVM();
+            CrudVM.SelectedCategory = new CategoryViewModel(catRepo.GetOne(catId)); //Doesn't really matter too much, so long as they stay the same
+            CrudVM.CreateEquipVM();
 
             var maxAfter = equipRepo.GetAll().Max(x => x.EquipId);
 
@@ -53,7 +53,7 @@ namespace LoN.Test.Tests
             
             var e = equipRepo.GetOne(eqId);
             var eqvm = new EquipViewModel(e);
-            equipVM.SelectedEquip = eqvm;
+            CrudVM.SelectedEquip = eqvm;
 
             eqvm.Agillity = 5;
             eqvm.Intelligence = 6;
@@ -64,7 +64,32 @@ namespace LoN.Test.Tests
 
             var maxBefore = equipRepo.GetAll().Max(x => x.EquipId);
 
-            equipVM.UpdateEquipVM();
+            CrudVM.UpdateEquipVM();
+
+            var maxAfter = equipRepo.GetAll().Max(x => x.EquipId);
+
+            Assert.AreEqual(maxBefore, maxAfter); //Check if nothing has been added
+
+            var updated = new EquipViewModel(equipRepo.GetOne(eqId));
+
+            Assert.AreEqual(eqvm, updated); //Check if they are equal after the update.
+        }
+
+        [TestMethod]
+        public void TestDelete()
+        {
+            var eqId = 5;
+
+            var e = equipRepo.GetOne(eqId);
+            var eqvm = new EquipViewModel(e);
+            CrudVM.SelectedEquip = eqvm;
+
+            CrudVM.DeleteEquipVM();
+            Assert.AreNotEqual(eqvm, new EquipViewModel(equipRepo.GetOne(eqId))); //before update check diff.
+
+            var maxBefore = equipRepo.GetAll().Max(x => x.EquipId);
+
+            CrudVM.UpdateEquipVM();
 
             var maxAfter = equipRepo.GetAll().Max(x => x.EquipId);
 
