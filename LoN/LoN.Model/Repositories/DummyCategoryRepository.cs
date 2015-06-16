@@ -10,6 +10,7 @@ namespace LoN.Model.Repositories
 {
     public class DummyCategoryRepository : IGenericRepository<Category>
     {
+        private List<Category> myCatList;
 
         public Context.AppContext Context
         {
@@ -23,9 +24,9 @@ namespace LoN.Model.Repositories
             }
         }
 
-        public IEnumerable<Category> GetAll()
+        public DummyCategoryRepository()
         {
-            List<Category> categories = new List<Category>
+            myCatList = new List<Category>
             {
                 new Category(){ CategoryId = 0, CategoryName = "Head"},
                 new Category(){ CategoryId = 1, CategoryName = "Shoulders" },
@@ -34,28 +35,34 @@ namespace LoN.Model.Repositories
                 new Category(){ CategoryId = 4, CategoryName = "Legs" },
                 new Category(){ CategoryId = 5, CategoryName = "Boots" }
             };
+        }
 
-            return categories;
+        public IEnumerable<Category> GetAll()
+        {
+            return myCatList;
         }
 
         public Category GetOne(int key)
         {
-            throw new NotImplementedException();
+            return myCatList.Where(x => x.CategoryId == key).ToList()[0];
         }
 
         public void Delete(Category entity)
         {
-            throw new NotImplementedException();
+            myCatList.Remove(entity);
         }
 
         public Category Create(Category entity)
         {
-            throw new NotImplementedException();
+            entity.CategoryId = myCatList.Max(x => (x.CategoryId + 1));
+            myCatList.Add(entity);
+            return entity;
         }
 
         public void Update(Category updatedEntity)
         {
-            throw new NotImplementedException();
+            var toUpdate = myCatList.Where(x => x.CategoryId == updatedEntity.CategoryId).ToList()[0];
+            toUpdate = updatedEntity;
         }
 
         public void Save()
