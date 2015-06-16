@@ -375,9 +375,12 @@
             </Grid>
         </Border>
 
-        <Button Content="Save" Command="{Binding NewNinja}" IsEnabled="{Binding IsCreateEnabled}" Margin="0,439,328,0"></Button>
+        <Button Content="Save" Command="{Binding CreateNinja}" IsEnabled="{Binding IsCreateEnabled}" Margin="0,439,328,0"></Button>
         <Button Content="Update" Command="{Binding SaveNinja}" IsEnabled="{Binding IsUpdateEnabled}" Margin="66,439,262,0"></Button>
-        
+        <Button Content="Clear" Command="{Binding ClearNinja}" IsEnabled="{Binding IsClearEnabled}" Margin="132,439,196,0"></Button>
+
+        <Button Content="New" Command="{Binding NewNinja}" Margin="0,10,328,429"></Button>
+
     </Grid>
 
 </Window>

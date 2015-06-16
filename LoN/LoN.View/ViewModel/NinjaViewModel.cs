@@ -11,7 +11,7 @@ namespace LoN.View.ViewModel
     public class NinjaViewModel : ViewModelBase
     {
         // Constructor
-        public NinjaViewModel() { _ninja = new Ninja(); Budget = 100; BudgetMessage = "Hidden"; Equips = new List<Equip>(); }
+        public NinjaViewModel() { _ninja = new Ninja(); Budget = 300; BudgetMessage = "Hidden"; Equips = new List<Equip>(); }
         public NinjaViewModel(Ninja ninja) { _ninja = ninja ?? new Ninja(); }
 
         // Field
@@ -29,10 +29,11 @@ namespace LoN.View.ViewModel
         private int _gearvalue;
         private string _budgetmessage;
 
-        // Property
+        #region Properties
+
         public List<Equip> Equips
         {
-            get { return _equips;}
+            get { return _equips; }
             set
             {
                 _equips = value;
@@ -47,7 +48,7 @@ namespace LoN.View.ViewModel
             set
             {
                 _ninja.NinjaId = value;
-                RaisePropertyChanged();            
+                RaisePropertyChanged();
             }
         }
 
@@ -57,7 +58,7 @@ namespace LoN.View.ViewModel
             set
             {
                 _ninja.Budget = value;
-                RaisePropertyChanged();             
+                RaisePropertyChanged();
             }
         }
 
@@ -67,7 +68,7 @@ namespace LoN.View.ViewModel
             set
             {
                 _categoryHead = value;
-                RaisePropertyChanged();               
+                RaisePropertyChanged();
             }
         }
 
@@ -169,21 +170,24 @@ namespace LoN.View.ViewModel
             }
         }
 
+
+        #endregion
         
+        #region Methods
 
         public void AddEquipment(Equip equip)
         {
-           if (equip != null)
+            if (equip != null)
             {
-                    _ninja.Budget -= equip.Price;
-                    _gearvalue += equip.Price;
-                    _ninjaStrength += equip.Strength;
-                    _ninjaAgillity += equip.Agillity;
-                    _ninjaIntelligence += equip.Intelligence;
-                    Equips.Add(equip);
-                    BudgetMessage = "Hidden";      
+                _ninja.Budget -= equip.Price;
+                _gearvalue += equip.Price;
+                _ninjaStrength += equip.Strength;
+                _ninjaAgillity += equip.Agillity;
+                _ninjaIntelligence += equip.Intelligence;
+                Equips.Add(equip);
+                BudgetMessage = "Hidden";
             }
-           
+
         }
 
         public bool BugetIsHighEnough(Equip equip)
@@ -192,12 +196,12 @@ namespace LoN.View.ViewModel
             {
                 if ((Budget - equip.Price) >= 0)
                 {
-                    BudgetMessage = "Hidden";  
+                    BudgetMessage = "Hidden";
                     return true;
                 }
                 else
                 {
-                   BudgetMessage = "Visible";         
+                    BudgetMessage = "Visible";
                 }
             }
             return false;
@@ -205,11 +209,11 @@ namespace LoN.View.ViewModel
 
         public void RemoveEquipment(Equip equip)
         {
-            _ninja.Budget       += equip.Price;
-            _gearvalue          -= equip.Price;
-            _ninjaStrength      -= equip.Strength;
-            _ninjaAgillity      -= equip.Agillity;
-            _ninjaIntelligence  -= equip.Intelligence;
+            _ninja.Budget += equip.Price;
+            _gearvalue -= equip.Price;
+            _ninjaStrength -= equip.Strength;
+            _ninjaAgillity -= equip.Agillity;
+            _ninjaIntelligence -= equip.Intelligence;
             Equips.Remove(equip);
         }
 
@@ -220,7 +224,7 @@ namespace LoN.View.ViewModel
                 if (equip.CategoryId == 1)
                 {
                     CategoryHead = equip;
-                 
+
                 }
                 else if (equip.CategoryId == 2)
                 {
@@ -247,13 +251,63 @@ namespace LoN.View.ViewModel
             }
         }
 
-        public void RefreshNinjaWindow()
+        public void RemoveAllEquip()
         {
-            ReloadEquipment();
+            foreach (Equip equip in Equips)
+            {
+                this.Budget += equip.Price;
+            }
+
+            this.Equips.Clear();
+            this.NinjaStrength = 0;
+            this.NinjaAgillity = 0;
+            this.NinjaIntelligence = 0;
+            this.GearValue = 0;
+            this.CategoryHead = null;
+            this.CategoryShoulders = null;
+            this.CategoryChest = null;
+            this.CategoryBelt = null;
+            this.CategoryLegs = null;
+            this.CategoryBoots = null;
+
+            RaisePropertyChanged(() => CategoryHead);
+            RaisePropertyChanged(() => CategoryShoulders);
+            RaisePropertyChanged(() => CategoryChest);
+            RaisePropertyChanged(() => CategoryBelt);
+            RaisePropertyChanged(() => CategoryLegs);
+            RaisePropertyChanged(() => CategoryBoots);
+            Refresh();
         }
 
-        // Method
+        public void CalculateStats()
+        {
+            foreach (Equip equip in Equips)
+            {
+                this.NinjaStrength += equip.Strength;
+                this.NinjaAgillity += equip.Agillity;
+                this.NinjaIntelligence += equip.Intelligence;
+                this.GearValue += equip.Price;
+            }
+        }
+
+        public void Refresh()
+        {
+            ReloadEquipment();
+            CalculateStats();
+            RaisePropertyChanged(() => this.Budget);
+            RaisePropertyChanged(() => this.Equips);
+            RaisePropertyChanged(() => this.NinjaAgillity);
+            RaisePropertyChanged(() => this.NinjaStrength);
+            RaisePropertyChanged(() => this.NinjaIntelligence);
+            RaisePropertyChanged(() => this.GearValue);
+            BudgetMessage = "Hidden";
+            RaisePropertyChanged(() => this.BudgetMessage);
+        }
+
         public Ninja ToEntity() { return new Ninja { Budget = Budget }; }
+
+
+        #endregion
 
     }
 }

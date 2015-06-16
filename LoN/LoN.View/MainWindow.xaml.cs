@@ -25,9 +25,9 @@ namespace LoN.View
             InitializeComponent();
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void SwitchWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-
+            ((App)Application.Current).ToCrudView();
         }
     }
 }

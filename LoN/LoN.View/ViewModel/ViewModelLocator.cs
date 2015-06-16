@@ -14,6 +14,9 @@
 
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Ioc;
+using LoN.Model.Interfaces;
+using LoN.Model.Models;
+using LoN.Model.Ninject;
 using Microsoft.Practices.ServiceLocation;
 
 namespace LoN.View.ViewModel
@@ -29,6 +32,7 @@ namespace LoN.View.ViewModel
         /// </summary>
         public ViewModelLocator()
         {
+            var nsl = NinjectServiceLocator.Instance;
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
             ////if (ViewModelBase.IsInDesignModeStatic)
@@ -41,6 +45,12 @@ namespace LoN.View.ViewModel
             ////    // Create run time view services and models
             ////    SimpleIoc.Default.Register<IDataService, DataService>();
             ////}
+
+            //NinjectService bindings
+            SimpleIoc.Default.Register<IGenericRepository<Category>>(() => nsl.categoryRepository);
+            SimpleIoc.Default.Register<IGenericRepository<Equip>>(() => nsl.equipRepository);
+            SimpleIoc.Default.Register<IGenericRepository<Ninja>>(() => nsl.ninjaRepository);
+            SimpleIoc.Default.Register<IGenericRepository<NinjaEquip>>(() => nsl.ninjaEquipRepository);
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<ShopViewModel>();

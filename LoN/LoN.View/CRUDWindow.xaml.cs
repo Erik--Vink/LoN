@@ -23,5 +23,10 @@ namespace LoN.View
         {
             InitializeComponent();
         }
+
+        private void SwitchWindow_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ((App)Application.Current).ToShopView();
+        }
     }
 }

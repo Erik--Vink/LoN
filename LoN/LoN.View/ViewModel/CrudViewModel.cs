@@ -68,10 +68,10 @@ namespace LoN.View.ViewModel
             AvailableEquipment = ReloadAvailableEquipment();
         }
 
-        public CrudViewModel() 
+        public CrudViewModel(IGenericRepository<Category> categoryRepository, IGenericRepository<Equip> equipRepository) 
         {
-            _categoryRepository = new CategoryRepository();
-            _equipRepository = new EquipRepository();
+            _categoryRepository = categoryRepository;
+            _equipRepository = equipRepository;
             RefreshData();
 
             Update = new RelayCommand(UpdateEquipVM);

@@ -74,6 +74,7 @@
             <Button Content="Buy" IsEnabled="{Binding IsEquipSelected}" Command="{Binding BuyEquip}" Grid.Column="1" Grid.Row="7"/>
 
         </Grid>
+        
         <Grid>
             <TextBlock Text="Budget:" Margin="0,246,53,43"></TextBlock>
             <TextBlock Text="{Binding NinjaViewModel.Budget}" Margin="46,246,0,43"></TextBlock>
@@ -83,6 +84,12 @@
                  Visibility="{Binding NinjaViewModel.BudgetMessage}" Margin="-10,219,10,75">
                  Not enough gold.
             </TextBlock>
+
+            <Label BorderBrush="Black" BorderThickness="1" Content="Manage Shop" MouseLeftButtonDown="SwitchWindow_OnMouseLeftButtonDown" Margin="0,0,0,281"/>
+
         </Grid>
+
+        
     </StackPanel>
+    
 </Window>

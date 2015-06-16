@@ -65,12 +65,12 @@ namespace LoN.View.ViewModel
             }
         }
 
-        public ShopViewModel() 
+        public ShopViewModel(IGenericRepository<Category> categoryRepository, IGenericRepository<Equip> equipRepository, IGenericRepository<Ninja> ninjaRepository, IGenericRepository<NinjaEquip> ninjaEquipRepository) 
         {
-            _categoryRepository = new CategoryRepository();
-            _equipRepository = new EquipRepository();
-            _ninjaRepository = new NinjaRepository();
-            _ninjaEquipRepository = new NinjaEquipRepository();
+            _categoryRepository = categoryRepository;
+            _equipRepository = equipRepository;
+            _ninjaRepository = ninjaRepository;
+            _ninjaEquipRepository = ninjaEquipRepository;
 
             Categories = new ObservableCollection<CategoryViewModel>(_categoryRepository.GetAll().Select(c => new CategoryViewModel(c)));
             Equipment = new ObservableCollection<EquipViewModel>(_equipRepository.GetAll().Select(e => new EquipViewModel(e)));
@@ -78,9 +78,11 @@ namespace LoN.View.ViewModel
             NinjaViewModel = new NinjaViewModel();
 
             BuyEquip = new RelayCommand(AddSelectedEquipToNinja);
-            NewNinja = new RelayCommand(SaveNewNinja);
+            CreateNinja = new RelayCommand(SaveNewNinja);
             SaveNinja = new RelayCommand(SaveCurrentNinja);
             LoadNinja = new RelayCommand(LoadCurrentNinja);
+            ClearNinja = new RelayCommand(ClearCurrentNinja);
+            NewNinja = new RelayCommand(NewNinjaModel);
         }
 
         #region Commands
@@ -107,6 +109,8 @@ namespace LoN.View.ViewModel
                 NinjaViewModel.AddEquipment(SelectedEquip.ToEntity());
                 ReloadEquipment();
                 RaisePropertyChanged(() => NinjaViewModel);
+                RaisePropertyChanged(() => IsCreateEnabled);
+                RaisePropertyChanged(() => IsClearEnabled);
             }
         }
         public ICommand SaveNinja { get; set; }
@@ -124,7 +128,7 @@ namespace LoN.View.ViewModel
             RaisePropertyChanged(() => AllNinjas);
         }
 
-        public ICommand NewNinja { get; set; }
+        public ICommand CreateNinja { get; set; }
         public void SaveNewNinja()
         {
             //Add new Ninja
@@ -143,6 +147,9 @@ namespace LoN.View.ViewModel
             AllNinjas = new ObservableCollection<NinjaViewModel>(_ninjaRepository.GetAll().Select(n => new NinjaViewModel(n)));
             RaisePropertyChanged(() => this.NinjaViewModel);
             RaisePropertyChanged(() => AllNinjas);
+            RaisePropertyChanged(() => IsUpdateEnabled);
+            RaisePropertyChanged(() => IsCreateEnabled);
+            RaisePropertyChanged(() => IsClearEnabled);
         }
 
         public ICommand LoadNinja { get; set; }
@@ -155,12 +162,34 @@ namespace LoN.View.ViewModel
             var eqToAdd = EquipIdList.Select(x => _equipRepository.GetOne(x.EquipId)).ToList();
             NinjaViewModel.Equips = eqToAdd;
 
+            this.NinjaViewModel.Refresh();
             RaisePropertyChanged(() => this.NinjaViewModel);          
             RaisePropertyChanged(() => IsUpdateEnabled);
             RaisePropertyChanged(() => IsCreateEnabled);
-            this.NinjaViewModel.BudgetMessage = "Hidden";
-            RaisePropertyChanged(() => this.NinjaViewModel.BudgetMessage);
+            RaisePropertyChanged(() => IsClearEnabled);
+            
+        }
 
+        public ICommand ClearNinja { get; set; }
+
+        public void ClearCurrentNinja()
+        {
+            this.NinjaViewModel.RemoveAllEquip();
+            RaisePropertyChanged(() => this.NinjaViewModel);
+            RaisePropertyChanged(() => IsUpdateEnabled);
+            RaisePropertyChanged(() => IsCreateEnabled);
+            RaisePropertyChanged(() => IsClearEnabled);
+        }
+
+        public ICommand NewNinja { get; set; }
+
+        public void NewNinjaModel()
+        {
+            this.NinjaViewModel = new NinjaViewModel();
+            RaisePropertyChanged(() => this.NinjaViewModel);
+            RaisePropertyChanged(() => IsUpdateEnabled);
+            RaisePropertyChanged(() => IsCreateEnabled);
+            RaisePropertyChanged(() => IsClearEnabled);
         }
 
         #endregion
@@ -181,11 +210,16 @@ namespace LoN.View.ViewModel
 
         public bool IsCreateEnabled
         {
-            get { return NinjaViewModel.NinjaId == 0; }
+            get { return (NinjaViewModel.NinjaId == 0 && (NinjaViewModel.Equips.Count > 0)); }
         }
         public bool IsUpdateEnabled
         {
             get { return NinjaViewModel.NinjaId != 0; }
+        }
+
+        public bool IsClearEnabled
+        {
+            get { return (NinjaViewModel.Equips.Count > 0); }
         }
 
         #endregion

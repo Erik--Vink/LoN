@@ -34,8 +34,10 @@ namespace LoN.View
             new CrudWindow() { Top = 100, Left = 100 }.Show();
             var main = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Main");
             if (main != null) { main.Close(); }
-            var list = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "List");
-            if (list != null) { list.Close(); }
+            var ninja = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Ninja");
+            if (ninja != null) { ninja.Close(); }
+            var load = Current.Windows.OfType<Window>().SingleOrDefault(w => w.Name == "Load");
+            if (load != null) { load.Close(); }
         }
 
 
