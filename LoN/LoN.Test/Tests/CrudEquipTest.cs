@@ -62,16 +62,15 @@ namespace LoN.Test.Tests
 
             Assert.AreNotEqual(eqvm, new EquipViewModel(equipRepo.GetOne(eqId))); //before update check diff.
 
-            var maxBefore = equipRepo.GetAll().Max(x => x.EquipId);
+            var maxBefore = equipRepo.GetAll().Count();
 
             CrudVM.UpdateEquipVM();
 
-            var maxAfter = equipRepo.GetAll().Max(x => x.EquipId);
+            var maxAfter = equipRepo.GetAll().Count();
 
             Assert.AreEqual(maxBefore, maxAfter); //Check if nothing has been added
 
             var updated = new EquipViewModel(equipRepo.GetOne(eqId));
-
             Assert.AreEqual(eqvm, updated); //Check if they are equal after the update.
         }
 
@@ -84,20 +83,15 @@ namespace LoN.Test.Tests
             var eqvm = new EquipViewModel(e);
             CrudVM.SelectedEquip = eqvm;
 
+            var maxBefore = equipRepo.GetAll().Count();
+
             CrudVM.DeleteEquipVM();
-            Assert.AreNotEqual(eqvm, new EquipViewModel(equipRepo.GetOne(eqId))); //before update check diff.
 
-            var maxBefore = equipRepo.GetAll().Max(x => x.EquipId);
+            var maxAfter = equipRepo.GetAll().Count();
 
-            CrudVM.UpdateEquipVM();
+            Assert.AreEqual(maxBefore-1, maxAfter); //Check if nothing has been added
 
-            var maxAfter = equipRepo.GetAll().Max(x => x.EquipId);
-
-            Assert.AreEqual(maxBefore, maxAfter); //Check if nothing has been added
-
-            var updated = new EquipViewModel(equipRepo.GetOne(eqId));
-
-            Assert.AreEqual(eqvm, updated); //Check if they are equal after the update.
+            Assert.IsNull(equipRepo.GetOne(eqId));
         }
     }
 }

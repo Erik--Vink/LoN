@@ -50,12 +50,19 @@ namespace LoN.Model.Repositories
 
         public Equip GetOne(int key)
         {
-            return myEquipList.Where(x => x.EquipId == key).ToList()[0];
+            try
+            {
+                return myEquipList.Where(x => x.EquipId == key).ToList()[0];
+            }
+            catch (ArgumentOutOfRangeException) 
+            {
+                return null;
+            }
         }
 
         public void Delete(Equip entity)
         {
-            myEquipList.Remove(entity);
+            myEquipList.RemoveAll(x => x.EquipId == entity.EquipId);
         }
 
         public Equip Create(Equip entity)
